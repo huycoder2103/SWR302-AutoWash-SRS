@@ -1,0 +1,243 @@
+<mxfile host="Electron">
+  <diagram name="DFD Level 1 - 5 Services" id="dfd-level1-autowash">
+    <mxGraphModel dx="824" dy="501" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2850" pageHeight="1500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- External entities -->
+        <mxCell id="ent_customer" parent="1" vertex="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;" value="Khách hàng&#10;(Customer)">
+          <mxGeometry x="40" y="90" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_staff" parent="1" vertex="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;" value="Nhân viên&#10;(Staff)">
+          <mxGeometry x="40" y="1000" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_smtp" parent="1" vertex="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;" value="Email SMTP">
+          <mxGeometry x="2560" y="90" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_camera" parent="1" vertex="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;" value="Camera LPR">
+          <mxGeometry x="2560" y="760" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_lprapi" parent="1" vertex="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;" value="3rd-party LPR API">
+          <mxGeometry x="2560" y="860" width="170" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Processes P1-P5 -->
+        <mxCell id="p1" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#f0f4ff;strokeColor=#1e40af;strokeWidth=2;" value="P1&#10;Account Service">
+          <mxGeometry x="300" y="260" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#f0f4ff;strokeColor=#1e40af;strokeWidth=2;" value="P2&#10;Booking Service&#10;(*)">
+          <mxGeometry x="680" y="260" width="240" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#f0f4ff;strokeColor=#1e40af;strokeWidth=2;" value="P3&#10;Queue Service">
+          <mxGeometry x="1080" y="260" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#f0f4ff;strokeColor=#1e40af;strokeWidth=2;" value="P4&#10;Notification Service">
+          <mxGeometry x="1460" y="260" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;fillColor=#f0f4ff;strokeColor=#1e40af;strokeWidth=2;" value="P5&#10;LPR Service">
+          <mxGeometry x="2160" y="760" width="200" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Data stores -->
+        <mxCell id="d1" parent="1" vertex="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;top=0;bottom=1;left=0;right=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="D1  Account, Customer">
+          <mxGeometry x="290" y="500" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" parent="1" vertex="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;top=0;bottom=1;left=0;right=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="D2  Vehicle">
+          <mxGeometry x="650" y="500" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" parent="1" vertex="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;top=0;bottom=1;left=0;right=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="D3  Service">
+          <mxGeometry x="850" y="500" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" parent="1" vertex="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;top=0;bottom=1;left=0;right=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="D4  Booking, BookingService">
+          <mxGeometry x="680" y="630" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" parent="1" vertex="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;top=0;bottom=1;left=0;right=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="D5  Queue">
+          <mxGeometry x="1080" y="500" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d6" parent="1" vertex="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;top=0;bottom=1;left=0;right=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="D6  Notification">
+          <mxGeometry x="1440" y="500" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d7" parent="1" vertex="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;top=0;bottom=1;left=0;right=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="D7  OtpVerification">
+          <mxGeometry x="1460" y="630" width="220" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Customer <-> P1 / P2 / P4 ===== -->
+        <mxCell id="e1" parent="1" edge="1" source="ent_customer" target="p1" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.7;exitY=1;entryX=0.25;entryY=0;" value="login; register; update profile;&#10;change password">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="187" y="230" /><mxPoint x="355" y="230" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" parent="1" edge="1" source="p1" target="ent_customer" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.4;exitY=0;entryX=0.5;entryY=1;" value="session/account info">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="388" y="210" /><mxPoint x="125" y="210" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" parent="1" edge="1" source="ent_customer" target="p2" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.85;exitY=1;entryX=0.35;entryY=0;" value="register/view/delete vehicle; view services;&#10;create/view/cancel booking">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="196" y="190" /><mxPoint x="764" y="190" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" parent="1" edge="1" source="p2" target="ent_customer" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.6;exitY=0;entryX=0.6;entryY=1;" value="vehicle list; service list; booking list &amp; status">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="824" y="170" /><mxPoint x="142" y="170" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" parent="1" edge="1" source="ent_customer" target="p4" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=1;exitY=0.85;entryX=0.35;entryY=0;" value="view notifications; mark as read">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="210" y="150" /><mxPoint x="1537" y="150" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" parent="1" edge="1" source="p4" target="ent_customer" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.65;exitY=0;entryX=1;entryY=0.6;" value="notification list">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1603" y="130" /><mxPoint x="210" y="130" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== Staff <-> P1 / P2 / P3 ===== -->
+        <mxCell id="e7" parent="1" edge="1" source="ent_staff" target="p1" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.7;exitY=0;entryX=0.3;entryY=1;" value="login; manage user accounts">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="187" y="420" /><mxPoint x="366" y="420" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" parent="1" edge="1" source="p1" target="ent_staff" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" value="user list">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="410" y="430" /><mxPoint x="125" y="430" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" parent="1" edge="1" source="ent_staff" target="p2" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.85;exitY=0;entryX=0.3;entryY=1;" value="manage services; confirm/cancel booking">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="196" y="440" /><mxPoint x="752" y="440" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" parent="1" edge="1" source="p2" target="ent_staff" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.5;exitY=1;entryX=0.6;entryY=0;" value="service catalog; booking details">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="800" y="450" /><mxPoint x="142" y="450" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" parent="1" edge="1" source="ent_staff" target="p3" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=1;exitY=0.15;entryX=0.35;entryY=1;" value="check-in; check-out; view queue;&#10;update/transition/cancel queue">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="210" y="460" /><mxPoint x="1157" y="460" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" parent="1" edge="1" source="p3" target="ent_staff" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.65;exitY=1;entryX=1;entryY=0.4;" value="queue list &amp; status">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1223" y="475" /><mxPoint x="210" y="475" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" parent="1" edge="1" source="ent_staff" target="p5" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.7;exitY=0;entryX=0.3;entryY=1;" value="scan plate request">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="159" y="945" /><mxPoint x="2220" y="945" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== Process <-> own data store ===== -->
+        <mxCell id="e14" parent="1" edge="1" source="p1" target="d1" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;startArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" value="read/write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" parent="1" edge="1" source="p2" target="d2" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;startArrow=block;exitX=0.3;exitY=1;entryX=0.6;entryY=0;" value="read/write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" parent="1" edge="1" source="p2" target="d3" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;startArrow=block;exitX=0.7;exitY=1;entryX=0.4;entryY=0;" value="read/write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" parent="1" edge="1" source="p2" target="d4" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;startArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" value="read/write">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="800" y="590" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e18" parent="1" edge="1" source="p3" target="d5" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;startArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" value="read/write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" parent="1" edge="1" source="p4" target="d6" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;startArrow=block;exitX=0.3;exitY=1;entryX=0.5;entryY=0;" value="read/write">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Cross-service / dashed edges ===== -->
+        <mxCell id="e20" parent="1" edge="1" source="p4" target="d7" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;startArrow=block;exitX=0.7;exitY=1;entryX=0.5;entryY=0;" value="generate/verify OTP">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1570" y="600" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e21" parent="1" edge="1" source="p1" target="d7" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;dashed=1;exitX=0.5;exitY=1;entryX=0.15;entryY=0;" value="verify OTP">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="410" y="580" /><mxPoint x="1493" y="580" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e22" parent="1" edge="1" source="p2" target="d7" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;dashed=1;exitX=0.5;exitY=1;entryX=0.3;entryY=0;" value="verify OTP (đăng ký xe)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="800" y="595" /><mxPoint x="1526" y="595" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e23" parent="1" edge="1" source="p3" target="d4" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;dashed=1;exitX=1;exitY=0.6;entryX=0.5;entryY=1;" value="update Booking.Status&#10;(check-in/out/cancel)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1330" y="335" /><mxPoint x="1330" y="720" /><mxPoint x="820" y="720" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e24" parent="1" edge="1" source="p3" target="d1" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;dashed=1;exitX=1;exitY=0.8;entryX=0.5;entryY=1;" value="update Customer stats&#10;(check-out)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1350" y="380" /><mxPoint x="1350" y="760" /><mxPoint x="410" y="760" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== Inter-process ===== -->
+        <mxCell id="e25" parent="1" edge="1" source="p1" target="p4" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.75;exitY=0;entryX=0.15;entryY=0;" value="request OTP (login/register/change pw)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="465" y="245" /><mxPoint x="1493" y="245" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e26" parent="1" edge="1" source="p2" target="p4" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.75;exitY=0;entryX=0.35;entryY=0;" value="request OTP (register vehicle);&#10;request booking confirmation">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="860" y="250" /><mxPoint x="1537" y="250" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e27" parent="1" edge="1" source="p3" target="p4" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.5;exitY=0;entryX=0.65;entryY=0;" value="request wash-complete notification">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1190" y="255" /><mxPoint x="1603" y="255" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== P3 <-> P5 ===== -->
+        <mxCell id="e28" parent="1" edge="1" source="p3" target="p5" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=1;exitY=0.4;entryX=0.3;entryY=0;" value="request plate scan (check-in)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1340" y="310" /><mxPoint x="1340" y="700" /><mxPoint x="2220" y="700" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e29" parent="1" edge="1" source="p5" target="p3" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0.7;exitY=0;entryX=1;entryY=0.55;" value="scanned plate string">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="2300" y="710" /><mxPoint x="1360" y="710" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== P5 <-> external LPR entities ===== -->
+        <mxCell id="e30" parent="1" edge="1" source="p5" target="ent_camera" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=1;exitY=0.3;entryX=0;entryY=0.3;" value="request plate scan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e31" parent="1" edge="1" source="ent_camera" target="ent_lprapi" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" value="capture plate image">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e32" parent="1" edge="1" source="ent_lprapi" target="p5" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=0;exitY=0.7;entryX=1;entryY=0.7;" value="extract plate text">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== P4 -> Email SMTP -> Customer ===== -->
+        <mxCell id="e33" parent="1" edge="1" source="p4" target="ent_smtp" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;exitX=1;exitY=0.3;entryX=0;entryY=0.4;" value="send OTP/confirmation/completion email">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1740" y="300" /><mxPoint x="2500" y="300" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e34" parent="1" edge="1" source="ent_smtp" target="ent_customer" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;endArrow=block;dashed=1;exitX=0;exitY=0.7;entryX=1;entryY=0.3;" value="deliver email">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="2400" y="115" /><mxPoint x="210" y="115" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend / note -->
+        <mxCell id="note1" parent="1" vertex="1" style="text;html=1;align=left;fontSize=11;fontStyle=2;fillColor=none;strokeColor=none;fontColor=#666666;" value="(*) SRS chỉ đặt tên chính thức 5 service — không có service riêng cho Vehicle. Ở đây tạm gộp Quản lý phương tiện (UC7-9) vào Booking Service (P2), cần nhóm xác nhận lại.&#10;Nét đứt = truy cập chéo service / luồng phụ cần bàn thêm: (1) P1, P2 tự đọc D7 OtpVerification thay vì qua P4 — nên tách hàm xác thực OTP dùng chung hay chấp nhận truy cập chéo?&#10;(2) P3 ghi trực tiếp lên D4 (Booking) và D1 (Customer stats) khi check-in/check-out/hủy — cross-service write, cân nhắc có cần lớp trung gian.">
+          <mxGeometry x="290" y="1170" width="2200" height="90" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

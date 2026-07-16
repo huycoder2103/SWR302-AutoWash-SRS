@@ -1,0 +1,181 @@
+<mxfile host="Electron">
+  <diagram name="ERD" id="erd1">
+    <mxGraphModel dx="1488" dy="885" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Account" parent="1" style="verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;html=1;whiteSpace=wrap;rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;fontColor=#1e293b;fontSize=11;" value="&lt;b&gt;Account&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;AccountId (PK)&lt;br/&gt;Email (UQ)&lt;br/&gt;Phone (UQ)&lt;br/&gt;PasswordHash&lt;br/&gt;FullName&lt;br/&gt;Role (1=Staff,2=Customer)&lt;br/&gt;IsActive" vertex="1">
+          <mxGeometry height="150" width="220" x="60" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="Customer" parent="1" style="verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;html=1;whiteSpace=wrap;rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;fontColor=#1e293b;fontSize=11;" value="&lt;b&gt;Customer&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;CustomerId (PK)&lt;br/&gt;AccountId (FK,UQ)&lt;br/&gt;TotalVisits&lt;br/&gt;TotalSpend&lt;br/&gt;LastVisitAt" vertex="1">
+          <mxGeometry height="118" width="220" x="350" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Vehicle" parent="1" style="verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;html=1;whiteSpace=wrap;rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;fontColor=#1e293b;fontSize=11;" value="&lt;b&gt;Vehicle&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;VehicleId (PK)&lt;br/&gt;CustomerId (FK)&lt;br/&gt;LicensePlate&lt;br/&gt;Brand&lt;br/&gt;Name&lt;br/&gt;RegisteredAt" vertex="1">
+          <mxGeometry height="134" width="220" x="660" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="Service" parent="1" style="verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;html=1;whiteSpace=wrap;rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;fontColor=#1e293b;fontSize=11;" value="&lt;b&gt;Service&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;ServiceId (PK)&lt;br/&gt;ServiceName&lt;br/&gt;Category (1-4)&lt;br/&gt;BasePrice&lt;br/&gt;EstimatedMinutes&lt;br/&gt;IsAddOn&lt;br/&gt;IsActive" vertex="1">
+          <mxGeometry height="150" width="220" x="60" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="BookingService" parent="1" style="verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;html=1;whiteSpace=wrap;rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;fontColor=#1e293b;fontSize=11;" value="&lt;b&gt;BookingService&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;BookingServiceId (PK)&lt;br/&gt;BookingId (FK)&lt;br/&gt;ServiceId (FK)&lt;br/&gt;PriceSnapshot" vertex="1">
+          <mxGeometry height="102" width="220" x="360" y="549" as="geometry" />
+        </mxCell>
+        <mxCell id="Booking" parent="1" style="verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;html=1;whiteSpace=wrap;rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;fontColor=#1e293b;fontSize=11;" value="&lt;b&gt;Booking&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;BookingId (PK)&lt;br/&gt;CustomerId (FK)&lt;br/&gt;VehicleId (FK)&lt;br/&gt;ScheduledAt&lt;br/&gt;Status (1-5)&lt;br/&gt;BasePrice&lt;br/&gt;FinalPrice" vertex="1">
+          <mxGeometry height="150" width="220" x="660" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="OtpVerification" parent="1" style="verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;html=1;whiteSpace=wrap;rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;fontColor=#1e293b;fontSize=11;" value="&lt;b&gt;OtpVerification&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;OtpId (PK)&lt;br/&gt;Email&lt;br/&gt;Code&lt;br/&gt;ExpiresAt&lt;br/&gt;IsUsed&lt;br/&gt;CreatedAt" vertex="1">
+          <mxGeometry height="134" width="220" x="70" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="Notification" parent="1" style="verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;html=1;whiteSpace=wrap;rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;fontColor=#1e293b;fontSize=11;" value="&lt;b&gt;Notification&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;NotificationId (PK)&lt;br/&gt;CustomerId (FK)&lt;br/&gt;Title&lt;br/&gt;Message&lt;br/&gt;Type&lt;br/&gt;IsRead&lt;br/&gt;CreatedAt" vertex="1">
+          <mxGeometry height="150" width="220" x="350" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="Queue" parent="1" style="verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;html=1;whiteSpace=wrap;rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;fontColor=#1e293b;fontSize=11;" value="&lt;b&gt;Queue&lt;/b&gt;&lt;hr size=&quot;1&quot;/&gt;QueueId (PK)&lt;br/&gt;BookingId (FK)&lt;br/&gt;VehicleId (FK)&lt;br/&gt;CustomerId (FK)&lt;br/&gt;LicensePlate&lt;br/&gt;Status (text)&lt;br/&gt;Position&lt;br/&gt;CheckInAt&lt;br/&gt;StartedAt&lt;br/&gt;CompletedAt&lt;br/&gt;StaffNote" vertex="1">
+          <mxGeometry height="214" width="220" x="660" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" edge="1" parent="1" source="Account" style="edgeStyle=entityRelationEdgeStyle;rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;" target="Customer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r1s" connectable="0" parent="r1" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r1t" connectable="0" parent="r1" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r2" edge="1" parent="1" style="edgeStyle=entityRelationEdgeStyle;rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="569.9999999999998" y="80" as="sourcePoint" />
+            <mxPoint x="690" y="80.00000000000011" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r2s" connectable="0" parent="r2" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r2t" connectable="0" parent="r2" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r3" edge="1" parent="1" source="Customer" style="rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;entryX=-0.015;entryY=0.184;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="Booking">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="200" />
+              <mxPoint x="570" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r3s" connectable="0" parent="r3" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r3t" connectable="0" parent="r3" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r4" edge="1" parent="1" source="Customer" style="rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Notification">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="569.9999999999998" y="192" as="sourcePoint" />
+            <mxPoint x="569.9999999999998" y="888" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r4s" connectable="0" parent="r4" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r4t" connectable="0" parent="r4" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r5" edge="1" parent="1" source="Customer" style="edgeStyle=entityRelationEdgeStyle;rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;" target="Queue">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5s" connectable="0" parent="r5" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r5t" connectable="0" parent="r5" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6" edge="1" parent="1" source="Vehicle" style="edgeStyle=entityRelationEdgeStyle;rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;" target="Booking">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6s" connectable="0" parent="r6" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6t" connectable="0" parent="r6" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r7" edge="1" parent="1" source="Vehicle" style="rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;" target="Queue">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r7s" connectable="0" parent="r7" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r7t" connectable="0" parent="r7" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r8" edge="1" parent="1" source="Booking" style="edgeStyle=entityRelationEdgeStyle;rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;" target="BookingService">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r8s" connectable="0" parent="r8" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r8t" connectable="0" parent="r8" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r9" edge="1" parent="1" source="Service" style="edgeStyle=entityRelationEdgeStyle;rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;" target="BookingService">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r9s" connectable="0" parent="r9" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r9t" connectable="0" parent="r9" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r10" edge="1" parent="1" source="Booking" style="rounded=1;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#475569;fontSize=10;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="Queue">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r10s" connectable="0" parent="r10" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r10t" connectable="0" parent="r10" style="edgeLabel;html=1;resizable=0;labelBackgroundColor=#ffffff;fontSize=9;" value="N" vertex="1">
+          <mxGeometry relative="1" x="0.7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="erd_note" parent="1" style="text;html=1;align=left;fontSize=10;fontColor=#7c2d12;fillColor=#fff7ed;strokeColor=#b45309;" value="OtpVerification: bảng tạm, đối chiếu qua Email, không khóa ngoại." vertex="1">
+          <mxGeometry height="28" width="300" x="40" y="410" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
