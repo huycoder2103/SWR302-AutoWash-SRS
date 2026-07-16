@@ -1,4 +1,4 @@
-# Auto-Wash — Bộ tài liệu yêu cầu phần mềm (SWP391)
+# Auto-Wash — Bộ tài liệu yêu cầu phần mềm (SWR302)
 
 Hệ thống quản lý trung tâm rửa xe tự động: khách hàng đặt lịch qua Mobile Web, nhân viên vận hành hàng chờ, nhận dạng biển số qua Camera LPR + 3rd-party LPR API, thông báo qua Email SMTP. Phạm vi gồm 5 service nội bộ: Account, Booking, Queue, Notification, LPR.
 
