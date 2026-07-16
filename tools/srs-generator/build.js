@@ -20,7 +20,7 @@ children.push(
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: [t('(Software Requirements Specification)', { italics: true, size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: [t('Dành cho', { size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 480 }, children: [t('Auto-Wash — Hệ thống quản lý trung tâm rửa xe tự động', { bold: true, size: 32 })] }),
-  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [t('Phiên bản: 2.4 (bỏ OTP khi đăng nhập — UC1 chỉ dùng mật khẩu; đồng bộ Use Case/Activity/Swimlane/State/mockup/SRS)', { size: 24 })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [t('Phiên bản: 2.5 (đặc tả UC đầy đủ: bổ sung Luồng sự kiện chính + Luồng thay thế/ngoại lệ cho cả 24 UC)', { size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [t('TP. Hồ Chí Minh, tháng 7 năm 2026', { size: 24 })] }),
   new Paragraph({ children: [new PageBreak()] }),
 );
@@ -48,6 +48,7 @@ children.push(table(
     ['12/07/2026', '2.2', 'HoangHuy', 'Rà soát và bổ sung nhánh lỗi/ngoại lệ còn thiếu cho phần 3 (24 UC), đối chiếu với các tình huống biên đã liệt kê ở Activity/Swimlane Diagrams: UC1 chặn đăng nhập khi tài khoản bị vô hiệu hóa (MSG26); UC6 hiển thị thông báo khi cố tự khóa tài khoản (MSG27); UC12 kiểm tra và chặn tạo đặt lịch khi khách hàng chưa có xe (MSG28); UC14 xử lý tranh chấp trạng thái đồng thời khi xác nhận booking (MSG29); UC15 hiển thị thông báo khi hủy booking sai trạng thái (MSG30); UC19 hiển thị thông báo khi chuyển trạng thái không hợp lệ (MSG31); UC11 hiển thị thông báo khi giá/thời lượng dịch vụ không hợp lệ (MSG32). Phụ lục 8.1 bổ sung MSG26–MSG32.'],
     ['15/07/2026', '2.3', 'HoangHuy', 'Đồng bộ toàn bộ sơ đồ với SRS: (1) Use Case Diagram gắn mã UC1–UC24 và chú thích «Track queue progress» là nhánh con của UC13 (chốt đúng 24 UC); (2) Activity & Swimlane bổ sung nhánh kiểm tra chuyển trạng thái hàng chờ hợp lệ cho UC19 (khớp MSG31); (3) Sơ đồ ngữ cảnh bổ sung luồng view & mark notifications (UC23/UC24) cho Customer; (4) State Transition thêm ghi chú ràng buộc thứ tự công đoạn (UC19). Bổ sung mục 1.4.1 Bảng thuật ngữ nghiệp vụ chuẩn hóa (Glossary) và ghi chú các UC chủ đích không vẽ Activity (UC2, UC10, UC16).'],
     ['16/07/2026', '2.4', 'HoangHuy', 'Thay đổi nghiệp vụ: bỏ xác thực OTP khi đăng nhập — UC1 chỉ dùng định danh + mật khẩu. Cập nhật đồng bộ: Use Case Diagram bỏ «include» Login→Verify OTP; Activity & Swimlane rút gọn luồng B. Login (bỏ các bước sinh/gửi/nhập/kiểm tra OTP); State Transition đổi nguồn OTP thành UC3/UC5/UC8; mockup Đăng nhập bỏ ô OTP; Phụ lục ET1 và MSG4 bỏ tham chiếu UC1. OTP vẫn dùng cho UC3 (đăng ký), UC5 (đổi mật khẩu), UC8 (đăng ký xe).'],
+    ['16/07/2026', '2.5', 'HoangHuy', 'Hoàn thiện Đặc tả Use Case (mục 3) cho cả 24 UC: đổi "Luồng hoạt động" thành "Luồng sự kiện chính" và bổ sung mục "Luồng thay thế / ngoại lệ" (tổng hợp các điều kiện lỗi/từ chối kèm cách xử lý) bên cạnh bảng Quy tắc nghiệp vụ. Không đổi nghiệp vụ; chỉ làm đầy đủ cấu trúc đặc tả UC.'],
   ],
   [1400, 1200, 1400, 5026],
 ));
@@ -687,7 +688,7 @@ const doc = new Document({
             new Paragraph({
               tabStops: [{ type: TabStopType.RIGHT, position: 9026 }],
               border: { bottom: { color: 'AAAAAA', space: 4, style: 'single', size: 4 } },
-              children: [ t('Auto-Wash — SRS v2.4', { size: 18, color: '666666' }),
+              children: [ t('Auto-Wash — SRS v2.5', { size: 18, color: '666666' }),
                           new TextRun({ text: '\tFPT University — SWP391', size: 18, color: '666666' }) ],
             }),
           ],
@@ -712,7 +713,7 @@ const doc = new Document({
 });
 
 Packer.toBuffer(doc).then((buf) => {
-  const outName = 'Auto-Wash_SRS_v2.4.docx';
+  const outName = 'Auto-Wash_SRS_v2.5.docx';
   fs.writeFileSync(outName, buf);
   console.log('Da tao', outName, '(' + buf.length + ' bytes)');
 });

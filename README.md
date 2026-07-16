@@ -2,26 +2,26 @@
 
 Hệ thống quản lý trung tâm rửa xe tự động: khách hàng đặt lịch qua Mobile Web, nhân viên vận hành hàng chờ, nhận dạng biển số qua Camera LPR + 3rd-party LPR API, thông báo qua Email SMTP. Phạm vi gồm 5 service nội bộ: Account, Booking, Queue, Notification, LPR.
 
-Toàn bộ tài liệu trong folder này **đã đồng bộ với nhau** tính đến 16/07/2026 (bản v2.4 — đăng nhập đã bỏ OTP).
+Toàn bộ tài liệu trong folder này **đã đồng bộ với nhau** tính đến 16/07/2026 — bản chính thức: **SRS v2.5**.
 
 ## Cấu trúc folder
 
 ```
 Auto-Wash-Project/
-├── README.md                  (file này)
+├── README.md                          (file này)
 ├── Auto-Wash_Plan_CaiTien.xlsx        Kế hoạch cải tiến + ma trận truy vết + checklist đồng bộ
 ├── docs/
-│   └── Auto-Wash_SRS_v2.4.docx        SRS chính thức, tiếng Việt (bản dùng — đăng nhập bỏ OTP, đủ ERD + 23 mockup)
+│   └── Auto-Wash_SRS_v2.5.docx        SRS chính thức, tiếng Việt (bản dùng)
 ├── diagrams/
-│   ├── ContextDiagram_v2.drawio       Sơ đồ ngữ cảnh (đã thêm luồng view & mark notifications)
+│   ├── ContextDiagram_v2.drawio       Sơ đồ ngữ cảnh
 │   ├── UseCaseDiagram.drawio          Use case diagram (5 page, đã gắn mã UC1–UC24)
-│   ├── ActivityDiagrams.drawio        Activity diagram (5 page, ngang; UC19 đã thêm nhánh transition)
-│   ├── Swimlanes.drawio               Swimlane diagram (5 page, ngang; UC19 đã thêm nhánh transition)
-│   ├── StateTransition.drawio         Sơ đồ chuyển trạng thái (1 page; ghi chú ràng buộc UC19)
-│   ├── ERD.drawio                     Sơ đồ thực thể — 9 thực thể (mới)
-│   ├── ERD.png                        Ảnh ERD render sẵn để chèn SRS (mới)
-│   ├── Mockups.html                   Gallery wireframe các màn hình chính (mới)
-│   └── mockups/                       PNG cả 23 màn mockup (SVG render): login, landing, register(_otp), profile, change_password, my_vehicles, add_vehicle_otp, services_list, create_booking, booking_summary, my_bookings, notifications(_detail); manage_users, manage_services, pending_bookings, staff_queue, advance_status, update_queue, checkin/checkout/cancel dialog
+│   ├── ActivityDiagrams.drawio        Activity diagram (5 page, ngang)
+│   ├── Swimlanes.drawio               Swimlane diagram (5 page, ngang)
+│   ├── StateTransition.drawio         Sơ đồ chuyển trạng thái (1 page)
+│   ├── ERD.drawio                     Sơ đồ thực thể — 9 thực thể
+│   ├── ERD.png                        Ảnh ERD render sẵn (chèn vào SRS mục 2.2)
+│   ├── Mockups.html                   Gallery xem nhanh 23 mockup
+│   └── mockups/                       PNG 23 màn mockup (nguồn chèn vào SRS mục 4)
 ├── legacy/                            Bản cũ, chỉ để tham chiếu
 │   ├── ContextDiagram_v1.drawio
 │   ├── Auto-Wash_SRS_v1.0_Full.docx   (tiếng Anh, còn loyalty/tier)
@@ -35,63 +35,83 @@ Auto-Wash-Project/
 
 ## Mô tả từng file
 
-### docs/Auto-Wash_SRS_v2.4.docx — tài liệu trung tâm
+### docs/Auto-Wash_SRS_v2.5.docx — tài liệu trung tâm
 
-SRS đầy đủ ~45 trang tiếng Việt, cấu trúc theo mẫu FA/IEEE 830: (1) Giới thiệu (kèm 1.4.1 Glossary chuẩn hóa); (2) Yêu cầu tổng quát — sơ đồ ngữ cảnh + bảng luồng tương tác, **ERD 9 thực thể (đã chèn hình)**, workflow, 2 bảng chuyển trạng thái, bảng use case kèm ghi chú «include»/«extend», ma trận phân quyền; (3) Đặc tả 24 use case với business rule đánh số toàn cục; (4) Danh mục mockup — **cả 23 màn hình đã chèn wireframe (SVG)**, xem nhanh tại Mockups.html; (5) Yêu cầu phi chức năng; (6) Tích hợp; (7) Di trú dữ liệu; (8) Phụ lục — 32 thông điệp MSG, 3 mẫu email ET.
+SRS đầy đủ ~54 trang tiếng Việt, cấu trúc theo mẫu FA / IEEE 830:
 
-**v2.4 (16/07/2026) — bỏ OTP khi đăng nhập:** UC1 chỉ dùng định danh + mật khẩu; đồng bộ UseCaseDiagram (bỏ include Login→OTP), Activity/Swimlane (rút gọn luồng Login), StateTransition (OTP nguồn UC3/UC5/UC8), mockup Đăng nhập, ET1 và MSG4. OTP vẫn dùng cho UC3/UC5/UC8.
+1. **Giới thiệu** — mục đích, phạm vi, đối tượng đọc, từ viết tắt, 1.4.1 Bảng thuật ngữ nghiệp vụ (Glossary), tài liệu tham khảo.
+2. **Yêu cầu tổng quát** — sơ đồ ngữ cảnh + bảng luồng tương tác, ERD 9 thực thể (đã chèn hình), workflow, 2 bảng chuyển trạng thái, bảng use case kèm ghi chú «include»/«extend», ma trận phân quyền.
+3. **Đặc tả 24 Use Case** — mỗi UC gồm: Mục tiêu, Tác nhân, Kích hoạt, Điều kiện tiên quyết, Kết quả, **Luồng sự kiện chính**, **Luồng thay thế / ngoại lệ**, **Quy tắc nghiệp vụ** (BR đánh số toàn cục).
+4. **Màn hình Mockup** — cả 23 màn đã chèn wireframe (xem nhanh tại `diagrams/Mockups.html`).
+5. **Yêu cầu phi chức năng** — hiệu năng, bảo mật, khả dụng, sẵn sàng/tin cậy, mở rộng.
+6. **Tích hợp** — Supabase PostgreSQL, Gmail SMTP/MailKit, LPR API, React Mobile Web.
+7. **Di trú dữ liệu**.
+8. **Phụ lục** — 32 thông điệp MSG, 3 mẫu email ET.
 
-**v2.3 (15/07/2026) — đồng bộ sơ đồ với SRS:** (1) UseCaseDiagram gắn mã UC1–UC24 + chú thích «Track queue progress» là nhánh con của UC13 (chốt đúng 24 UC); (2) Activity & Swimlane bổ sung nhánh kiểm tra chuyển trạng thái hàng chờ hợp lệ cho UC19 (khớp MSG31); (3) ContextDiagram thêm luồng view & mark notifications (UC23/UC24); (4) StateTransition thêm ghi chú ràng buộc thứ tự công đoạn (UC19); (5) bổ sung 1.4.1 Glossary + ghi chú các UC chủ đích không vẽ Activity (UC2, UC10, UC16); (6) vẽ ERD 9 thực thể và chèn vào mục 2.2; (7) tạo 6 mockup wireframe chèn vào mục 4.
+**Điểm nghiệp vụ then chốt:** đăng nhập **chỉ dùng mật khẩu** (OTP chỉ còn cho đăng ký, đổi mật khẩu, đăng ký xe); đặt lịch có bước **xem tóm tắt trước khi xác nhận**; đăng ký báo email trùng thì **điều hướng sang đăng nhập**; hàng chờ **FIFO**; giá = tổng giá dịch vụ (không giảm giá). So với v1.0 đã **loại bỏ** loyalty/tier/điểm, voucher, campaign, admin dashboard, Google OAuth.
 
-**v2.2 (12/07/2026):** rà soát toàn bộ 24 UC, bổ sung 7 MSG mới (MSG26–32) cho các nhánh lỗi/ngoại lệ: UC1 chặn đăng nhập khi tài khoản bị khóa; UC6 chặn tự vô hiệu hóa tài khoản mình; UC12 chặn đặt lịch khi chưa có xe; UC14 concurrency khi xác nhận booking; UC15 báo lỗi khi hủy booking sai trạng thái; UC19 báo lỗi khi chuyển trạng thái hàng chờ không hợp lệ; UC11 báo lỗi khi giá/thời lượng dịch vụ không hợp lệ.
+**Lịch sử phiên bản (tóm tắt):**
 
-Điểm nghiệp vụ then chốt: đăng nhập **chỉ dùng mật khẩu** (đã bỏ OTP từ v2.4; OTP chỉ còn cho đăng ký, đổi mật khẩu, đăng ký xe); đặt lịch có bước **xem tóm tắt trước khi xác nhận**; đăng ký báo email trùng thì **điều hướng sang đăng nhập**; hàng chờ **FIFO**; giá = tổng giá dịch vụ (không giảm giá); phiên bản này **đã loại bỏ** loyalty/tier/điểm, voucher, campaign, admin dashboard, Google OAuth so với v1.0.
+- **v2.0** — dịch/viết lại từ v1.0 sang tiếng Việt đúng phạm vi ContextDiagram.
+- **v2.1** — đồng bộ theo Use Case Diagram (quan hệ «include»/«extend», điều hướng, bước tóm tắt đặt lịch).
+- **v2.2** — bổ sung 7 nhánh lỗi/ngoại lệ và MSG26–MSG32 cho 24 UC.
+- **v2.3** — đồng bộ toàn bộ sơ đồ: mã UC1–UC24, nhánh UC19, luồng notifications trên Context, ghi chú State, Glossary; vẽ ERD; tạo 23 mockup.
+- **v2.4** — bỏ OTP khi đăng nhập (UC1 chỉ dùng mật khẩu); đồng bộ UseCase/Activity/Swimlane/State/mockup/phụ lục.
+- **v2.5** — hoàn thiện đặc tả UC: mỗi UC có Luồng sự kiện chính + Luồng thay thế/ngoại lệ + Quy tắc nghiệp vụ.
 
 ### diagrams/ContextDiagram_v2.drawio
 
-Sơ đồ ngữ cảnh: Auto-Wash System (5 service) ở giữa; tác nhân Staff, Customer; kênh Mobile Web; hệ thống ngoài Email SMTP, Camera LPR, 3rd-party LPR API. So với v1: đổi tên "License Plate Service" → "3rd-party LPR API", thêm luồng request plate scan (System → Camera), 3 luồng phản hồi cho Customer, luồng update queue status / view vehicles & services / manage account.
+Sơ đồ ngữ cảnh: Auto-Wash System (5 service) ở giữa; tác nhân Staff, Customer; kênh Mobile Web; hệ thống ngoài Email SMTP, Camera LPR, 3rd-party LPR API. Có đủ luồng request plate scan, các luồng phản hồi cho Customer, update queue status, view vehicles & services, manage account và view & mark notifications.
 
 ### diagrams/UseCaseDiagram.drawio — 5 page theo phân hệ
 
-24 UC (đã gắn **mã UC1–UC24**) + sub-UC "Verify OTP via email", tên tiếng Anh. «Track queue progress» được chú thích là nhánh con của UC13 (không tính là UC độc lập → tổng đúng 24). Quan hệ: 3 «include» (Register, Change password, Register vehicle → Verify OTP — **Login đã bỏ include OTP từ v2.4**); 4 «extend» (Delete vehicle → View vehicles; Track queue progress → View bookings; Scan LPR → Check-in; Mark as read → View notifications). Nguyên tắc: bước bắt buộc actor cảm nhận được → include, hành vi tùy chọn/có điều kiện → extend; không đưa bước xử lý nội bộ lên diagram.
+24 UC (đã gắn **mã UC1–UC24**) + sub-UC "Verify OTP via email". «Track queue progress» là nhánh con của UC13 (không tính là UC độc lập → tổng đúng 24). Quan hệ: **3 «include»** (Register, Change password, Register vehicle → Verify OTP — Login **không** dùng OTP); **4 «extend»** (Delete vehicle → View vehicles; Track queue progress → View bookings; Scan LPR → Check-in; Mark as read → View notifications). Nguyên tắc: bước bắt buộc actor cảm nhận được → include, hành vi tùy chọn/có điều kiện → extend; không đưa bước xử lý nội bộ lên diagram.
 
 ### diagrams/ActivityDiagrams.drawio và Swimlanes.drawio — mỗi file 5 page
 
-Cùng 17 luồng, nhóm theo cụm: (1) Account: Register + Login + Update profile + Change password; (2) Vehicle: view/register/delete; (3) Booking: create + view/track + confirm + cancel; (4) Queue: check-in→check-out + cancel + update; (5) Administration + Notifications. ActivityDiagrams vẽ dạng trục ngang đơn; Swimlanes vẽ làn ngang (Customer / Staff / Auto-Wash System / Email SMTP), mỗi pool chỉ chứa làn segment đó dùng.
+Cùng 17 luồng, nhóm theo cụm: (1) Account: Register + Login + Update profile + Change password; (2) Vehicle: view/register/delete; (3) Booking: create + view/track + confirm + cancel; (4) Queue: check-in→check-out + cancel + update; (5) Administration + Notifications. ActivityDiagrams vẽ trục ngang đơn; Swimlanes vẽ làn ngang (Customer / Staff / Auto-Wash System / Email SMTP).
 
-Quy ước: chuẩn UML trắng đen (chấm đen start, bullseye end, thoi decision); vòng lặp lỗi vòng lên trên, nhánh từ chối đi xuống dưới, phân tầng máng theo độ phủ để không cắt nhau; nhãn không dùng mã MSG. Các tình huống biên đã phủ: OTP hết hạn ≠ OTP sai, tài khoản bị khóa, email trùng → nhảy sang Login, chưa có xe khi đặt lịch, re-check Pending khi confirm (concurrency), LPR quá 5 giây → nhập tay, walk-in nhập tiền tay, không tài khoản → không gửi email, chặn tự khóa tài khoản mình.
+Quy ước: chuẩn UML trắng đen (chấm đen start, bullseye end, thoi decision); vòng lặp lỗi vòng lên trên, nhánh từ chối đi xuống dưới; nhãn không dùng mã MSG. Tình huống biên đã phủ: OTP hết hạn ≠ OTP sai, tài khoản bị khóa, email trùng → nhảy sang Login, chưa có xe khi đặt lịch, re-check Pending khi confirm (concurrency), chuyển trạng thái hàng chờ không hợp lệ (UC19), LPR quá 5 giây → nhập tay, walk-in nhập tiền tay, không tài khoản → không gửi email, chặn tự khóa tài khoản mình. Luồng "B. Login" chỉ còn định danh + mật khẩu → tạo session (đã bỏ OTP).
 
 ### diagrams/StateTransition.drawio — 1 page, 3 sơ đồ
 
-Booking (Pending → Confirmed → CheckedIn → Completed, nhánh Cancelled — khớp bảng 2.4.1 SRS); Queue (composite "In progress" bao 5 công đoạn, một mũi tên Cancelled với guard [not Completed] — khớp 2.4.2); OTP lifecycle (Active → Verified/Expired — khớp CBR3).
+Booking (Pending → Confirmed → CheckedIn → Completed, nhánh Cancelled — khớp bảng 2.4.1 SRS); Queue (composite "In progress" bao 5 công đoạn, một mũi tên Cancelled với guard [not Completed], kèm ghi chú ràng buộc thứ tự công đoạn UC19 — khớp 2.4.2); OTP lifecycle (Active → Verified/Expired, nguồn UC3/UC5/UC8 — khớp CBR3).
+
+### diagrams/ERD.drawio — 9 thực thể
+
+Account, Customer, Vehicle, Booking, BookingService, Service, Queue, Notification, OtpVerification (kèm trường chính và quan hệ). `ERD.png` là bản render để chèn vào SRS mục 2.2; muốn hình chuẩn drawio thì mở `ERD.drawio` và File > Export as PNG đè lên `ERD.png` rồi build lại.
+
+### diagrams/Mockups.html + mockups/ — 23 màn wireframe
+
+14 màn khách hàng (mobile): landing, login, register(_otp), profile, change_password, my_vehicles, add_vehicle_otp, services_list, create_booking, booking_summary, my_bookings, notifications(_detail). 9 màn nhân viên (desktop): manage_users, manage_services, pending_bookings, staff_queue, advance_status, update_queue, checkin/checkout/cancel dialog. Mỗi màn kèm ghi chú nghiệp vụ (UC/MSG tương ứng). `Mockups.html` để xem nhanh cả bộ; PNG được `build.js` chèn vào SRS mục 4.
 
 ### tools/srs-generator/ — sinh lại file SRS docx
 
-`build.js` chứa toàn bộ nội dung các mục 1, 2, 4–8 + lắp ráp document; `uc1.js`/`uc2.js` chứa dữ liệu 24 đặc tả UC (BR tự đánh số khi render); `helpers.js` là hàm dựng bảng/heading theo docx-js. Sinh lại file:
+`build.js` chứa nội dung các mục 1, 2, 4–8 + lắp ráp document; `uc1.js` / `uc2.js` chứa dữ liệu 24 đặc tả UC (BR tự đánh số khi render); `helpers.js` là hàm dựng bảng/heading và `renderUC` (Luồng sự kiện chính + Luồng thay thế/ngoại lệ + Quy tắc nghiệp vụ). Sinh lại file:
 
 ```
 npm install docx
-node build.js        # tạo Auto-Wash_SRS_v2.4.docx tại chỗ (tự chèn ERD.png + mockups/*.png nếu có)
+node build.js        # tạo Auto-Wash_SRS_v2.5.docx tại chỗ (tự chèn ERD.png + mockups/*.png nếu có)
 ```
 
-Muốn sửa nội dung SRS thì sửa các file .js rồi build lại, đừng sửa tay file docx để tránh lệch nguồn.
+**Quan trọng:** muốn sửa nội dung SRS thì sửa các file `.js` rồi build lại, **đừng sửa tay file .docx** để tránh lệch nguồn.
 
 ## Nhật ký công việc đã làm
 
-1. Viết lại SRS v1.0 (tiếng Anh, phạm vi rộng) thành **v2.0 tiếng Việt** theo đúng phạm vi ContextDiagram: bỏ loyalty/tier, voucher, campaign, dashboard, Google OAuth; thêm LPR, Quản lý dịch vụ/tài khoản, Xác nhận/Hủy đặt lịch cho Staff.
-2. Review sơ đồ ngữ cảnh, sửa 3 lỗi thành **ContextDiagram_v2**: thêm luồng phản hồi cho Customer, đổi tên 3rd-party LPR API, thêm request plate scan; sau đó bổ sung 3 luồng gộp để phủ đủ UC.
-3. Vẽ **UseCaseDiagram** (tổng → tách 5 page → chuẩn hóa include/extend, bỏ functional decomposition, bỏ tiền tố UC, tên tiếng Anh, Login include OTP).
-4. Đồng bộ SRS lên **v2.1**: UC1 thêm OTP hai lớp, mục 2.5 thêm ghi chú quan hệ, UC3 thêm điều hướng sang Login, UC12 thêm bước tóm tắt + xác nhận, bảng 2.1 khớp context.
-5. Vẽ **ActivityDiagrams + Swimlanes** (17 luồng, qua nhiều vòng: bỏ màu, chuyển ngang, gộp cụm, chống chồng chéo, bỏ mã MSG).
+1. Viết lại SRS v1.0 (tiếng Anh) thành **v2.0 tiếng Việt** đúng phạm vi ContextDiagram: bỏ loyalty/tier, voucher, campaign, dashboard, Google OAuth; thêm LPR, Quản lý dịch vụ/tài khoản, Xác nhận/Hủy đặt lịch cho Staff.
+2. Review & sửa sơ đồ ngữ cảnh thành **ContextDiagram_v2** (luồng phản hồi Customer, đổi tên 3rd-party LPR API, request plate scan, các luồng gộp phủ đủ UC).
+3. Vẽ **UseCaseDiagram** (tách 5 page, chuẩn hóa include/extend, tên tiếng Anh).
+4. Đồng bộ SRS lên **v2.1** (quan hệ 2.5, điều hướng UC3, bước tóm tắt UC12, bảng 2.1 khớp context).
+5. Vẽ **ActivityDiagrams + Swimlanes** (17 luồng: bỏ màu, chuyển ngang, gộp cụm, chống chồng chéo).
 6. Vẽ **StateTransition** (Booking, Queue, OTP).
-7. Dọn dẹp: xóa BusinessFlow.drawio (bản luồng cũ bị thay thế).
-8. Rà soát SRS lên **v2.2**: kiểm tra toàn bộ 24 UC theo checklist tình huống biên ở bước 5, bổ sung 3 bước kiểm tra + 7 BR/MSG còn thiếu (UC1, UC6, UC11, UC12, UC14, UC15, UC19). Không đổi diagram lần này.
-9. **Đồng bộ & hoàn thiện lên v2.3** (theo Auto-Wash_Plan_CaiTien.xlsx): gắn mã UC1–UC24 và chốt 24 UC trên UseCaseDiagram; thêm nhánh transition UC19 vào Activity/Swimlane + ghi chú State; thêm luồng notifications vào Context; bổ sung Glossary (1.4.1) và ghi chú UC không vẽ Activity; vẽ ERD 9 thực thể + chèn vào mục 2.2; tạo mockup wireframe cho cả 23 màn (SVG) + chèn vào mục 4 và Mockups.html; build lại SRS v2.3; dọn v2.1/v2.2 vào legacy.
-10. **Bỏ OTP khi đăng nhập → v2.4:** UC1 chỉ dùng định danh + mật khẩu. Đồng bộ toàn bộ: UseCaseDiagram bỏ «include» Login→Verify OTP (còn 3 include); Activity & Swimlane rút gọn luồng "B. Login" (bỏ sinh/gửi/nhập/kiểm tra OTP, nối thẳng kiểm tra mật khẩu → tạo session); StateTransition đổi nguồn OTP thành UC3/UC5/UC8; mockup Đăng nhập bỏ ô OTP; SRS cập nhật UC1, mục 2.5, ET1, MSG4; build lại v2.4; dọn v2.3 vào legacy.
+7. Dọn dẹp: xóa BusinessFlow.drawio (bản luồng cũ).
+8. Rà soát SRS lên **v2.2**: bổ sung nhánh lỗi/ngoại lệ + 7 BR/MSG (MSG26–32).
+9. **Đồng bộ & hoàn thiện lên v2.3** (theo `Auto-Wash_Plan_CaiTien.xlsx`): mã UC1–UC24, nhánh UC19 trên Activity/Swimlane/State, luồng notifications trên Context, Glossary; vẽ ERD; tạo 23 mockup; chèn ERD + mockup vào SRS.
+10. **Bỏ OTP khi đăng nhập → v2.4:** UC1 chỉ dùng định danh + mật khẩu; đồng bộ UseCaseDiagram, Activity/Swimlane (rút gọn luồng Login), StateTransition, mockup Đăng nhập, ET1 và MSG4.
+11. **Hoàn thiện đặc tả UC → v2.5:** nâng `renderUC` để mỗi UC có Luồng sự kiện chính + Luồng thay thế/ngoại lệ + Quy tắc nghiệp vụ; build lại (đủ 24 UC spec, 24 hình).
 
 ## Việc còn dở / gợi ý bước tiếp theo
 
-- Mockup: đã có 6 màn chính; các màn còn lại (landing page, quản lý dịch vụ, các dialog check-in/check-out/hủy...) nên bổ sung tiếp vào diagrams/mockups/ và map thêm trong build.js.
-- ERD.png đang render bằng script; nếu muốn hình chuẩn drawio, mở diagrams/ERD.drawio và File > Export as PNG đè lên ERD.png rồi build lại.
-- Các sơ đồ khác (Context/UseCase/Activity/Swimlane/State) trong SRS vẫn ghi [TBU/xem file drawio]: khi cần, export PNG từ drawio và map vào build.js giống ERD/mockup.
-- Khi đổi nghiệp vụ, sửa theo thứ tự: ContextDiagram → UseCaseDiagram → Activity/Swimlane/StateTransition → SRS (qua srs-generator) để giữ đồng bộ.
+- Dọn `docs/Auto-Wash_SRS_v2.4.docx` vào `legacy/` sau khi đóng Word (đang mở nên chưa di chuyển được).
+- Các sơ đồ Context/UseCase/Activity/Swimlane/State trong SRS vẫn ghi [xem file drawio]: khi cần, export PNG từ drawio rồi map vào `build.js` giống ERD/mockup.
+- Khi đổi nghiệp vụ, sửa theo thứ tự: **ContextDiagram → UseCaseDiagram → Activity/Swimlane/StateTransition → SRS (qua srs-generator)** để giữ đồng bộ; luôn build lại và rà soát sau mỗi lần sửa.

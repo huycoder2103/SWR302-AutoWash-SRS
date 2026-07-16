@@ -38,7 +38,6 @@ function cell(content, width, opts = {}) {
   });
 }
 
-// headers: string[], rows: string[][], widths: number[] (sum = CW)
 function table(headers, rows, widths) {
   const w = widths || headers.map(() => Math.floor(CW / headers.length));
   const diff = CW - w.reduce((a, b) => a + b, 0);
@@ -65,27 +64,51 @@ function labelPara(label, text) {
   });
 }
 
-// Renders one use case spec. brCounter is a mutable {n} object for global BR numbering.
 function renderUC(uc, brCounter) {
   const out = [];
-  out.push(h3(`${uc.id}: ${uc.name}`));
+  out.push(h3(uc.id + ': ' + uc.name));
   out.push(labelPara('Mục tiêu', uc.objective));
   out.push(labelPara('Tác nhân', uc.actors));
   out.push(labelPara('Kích hoạt', uc.trigger));
   out.push(labelPara('Điều kiện tiên quyết', uc.pre));
   out.push(labelPara('Kết quả sau thực hiện', uc.post));
-  out.push(p('Luồng hoạt động:', { run: { bold: true } }));
+
+  out.push(p('Luồng sự kiện chính:', { run: { bold: true } }));
   out.push(table(
     ['Bước', 'Mô tả'],
-    uc.steps.map((s, i) => [`(${i + 1})`, s]),
+    uc.steps.map((s, i) => ['(' + (i + 1) + ')', s]),
     [900, CW - 900],
   ));
   out.push(spacer());
+
+  const excKw = ['msg', 'từ chối', 'lỗi', 'chặn', 'không hợp lệ', 'hết hạn', 'không đúng',
+    'không khớp', 'vô hiệu', 'trống', 'trùng', 'sai', 'không thể', 'không tìm thấy', 'không được'];
+  const isExc = function (d) {
+    const dl = d.toLowerCase();
+    return excKw.some(function (k) { return dl.indexOf(k) !== -1; });
+  };
+  let exFlows = [];
+  if (uc.altFlows) { exFlows = uc.altFlows.slice(); }
+  if (uc.brs && uc.brs.length) {
+    uc.brs.forEach(function (b) { if (isExc(b.desc)) { exFlows.push({ step: b.step, desc: b.desc }); } });
+  }
+  out.push(p('Luồng thay thế / ngoại lệ:', { run: { bold: true } }));
+  if (exFlows.length) {
+    out.push(table(
+      ['Tại bước', 'Điều kiện & cách xử lý'],
+      exFlows.map(function (e) { return ['(' + e.step + ')', e.desc]; }),
+      [1100, CW - 1100],
+    ));
+  } else {
+    out.push(p('Không có luồng ngoại lệ đặc biệt; lỗi đầu vào xử lý theo quy tắc chung.'));
+  }
+  out.push(spacer());
+
   out.push(p('Quy tắc nghiệp vụ:', { run: { bold: true } }));
   if (uc.brs && uc.brs.length) {
     out.push(table(
       ['Bước', 'Mã BR', 'Mô tả'],
-      uc.brs.map((b) => [`(${b.step})`, `BR${brCounter.n++}`, b.desc]),
+      uc.brs.map(function (b) { return ['(' + b.step + ')', 'BR' + (brCounter.n++), b.desc]; }),
       [900, 1100, CW - 2000],
     ));
   } else {
