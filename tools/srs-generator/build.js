@@ -13,6 +13,17 @@ const { t, p, h1, h2, h3, table, spacer, bullet, renderUC, CW } = H;
 const brCounter = { n: 1 };
 const children = [];
 
+function figart(sub, file, w, h, caption) {
+  const fp = path.join(__dirname, '..', '..', 'diagrams', 'diagram picture', sub, file);
+  const out = [];
+  if (fs.existsSync(fp)) {
+    out.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 60 },
+      children: [ new ImageRun({ type: 'png', data: fs.readFileSync(fp), transformation: { width: w, height: h } }) ] }));
+    out.push(p(caption, { run: { italics: true, size: 18 } }));
+  } else { out.push(p(caption + ' [thiếu ảnh: ' + file + ']', { run: { italics: true } })); }
+  return out;
+}
+
 /* ---------------- Title page ---------------- */
 children.push(
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 2000, after: 240 }, children: [t('FPT University — SWP391', { bold: true, size: 28 })] }),
@@ -20,7 +31,7 @@ children.push(
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: [t('(Software Requirements Specification)', { italics: true, size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: [t('Dành cho', { size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 480 }, children: [t('Auto-Wash — Hệ thống quản lý trung tâm rửa xe tự động', { bold: true, size: 32 })] }),
-  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [t('Phiên bản: 2.6 (bổ sung Dialog Map — luồng màn hình Khách hàng & Nhân viên vào mục 4)', { size: 24 })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [t('Phiên bản: 2.8 (chèn đầy đủ mọi sơ đồ đã vẽ: thêm Activity, Swimlane, Data Flow vào mục 2.3; sửa văn bản đăng nhập không OTP)', { size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [t('TP. Hồ Chí Minh, tháng 7 năm 2026', { size: 24 })] }),
   new Paragraph({ children: [new PageBreak()] }),
 );
@@ -50,6 +61,8 @@ children.push(table(
     ['16/07/2026', '2.4', 'HoangHuy', 'Thay đổi nghiệp vụ: bỏ xác thực OTP khi đăng nhập — UC1 chỉ dùng định danh + mật khẩu. Cập nhật đồng bộ: Use Case Diagram bỏ «include» Login→Verify OTP; Activity & Swimlane rút gọn luồng B. Login (bỏ các bước sinh/gửi/nhập/kiểm tra OTP); State Transition đổi nguồn OTP thành UC3/UC5/UC8; mockup Đăng nhập bỏ ô OTP; Phụ lục ET1 và MSG4 bỏ tham chiếu UC1. OTP vẫn dùng cho UC3 (đăng ký), UC5 (đổi mật khẩu), UC8 (đăng ký xe).'],
     ['16/07/2026', '2.5', 'HoangHuy', 'Hoàn thiện Đặc tả Use Case (mục 3) cho cả 24 UC: đổi "Luồng hoạt động" thành "Luồng sự kiện chính" và bổ sung mục "Luồng thay thế / ngoại lệ" (tổng hợp các điều kiện lỗi/từ chối kèm cách xử lý) bên cạnh bảng Quy tắc nghiệp vụ. Không đổi nghiệp vụ; chỉ làm đầy đủ cấu trúc đặc tả UC.'],
     ['16/07/2026', '2.6', 'HoangHuy', 'Bổ sung mục 4.1 Sơ đồ luồng màn hình (Dialog Map): hai sơ đồ Khách hàng (Mobile Web) và Nhân viên (Desktop) thể hiện điều hướng giữa 23 màn; danh mục mockup dời xuống 4.2–4.6. Nguồn: diagrams/DialogMap_Customer.drawio, diagrams/DialogMap_Staff.drawio.'],
+    ['17/07/2026', '2.7', 'HoangHuy', 'Chèn ảnh sơ đồ (xuất từ drawio) vào mục 2: Hình 1 Sơ đồ ngữ cảnh, Hình 2 ERD, Hình 3 Chuyển trạng thái (Booking/Queue/OTP), Hình 5–9 Use Case 5 phân hệ; xóa toàn bộ [TBU] hình trong mục 2.'],
+    ['17/07/2026', '2.8', 'HoangHuy', 'Chèn nốt các sơ đồ còn lại (xuất từ drawio): mục 2.3 thêm 2.3.4 Activity (5 hình), 2.3.5 Swimlane (5 hình), 2.3.6 Data Flow (1 hình). Sửa văn bản 2.3.1: đăng nhập không dùng OTP. SRS nay thể hiện đầy đủ toàn bộ sơ đồ.'],
   ],
   [1400, 1200, 1400, 5026],
 ));
@@ -155,7 +168,7 @@ children.push(h1('2. Yêu cầu tổng quát'));
 children.push(p('Phần này mô tả tổng quan các chức năng của hệ thống bằng sơ đồ: loại người dùng, quyền được cấp và trình tự hoàn thành các luồng nghiệp vụ. Đặc tả chi tiết xem tại Phần 3.'));
 
 children.push(h2('2.1 Sơ đồ ngữ cảnh (Context Diagram)'));
-children.push(p('Hình 1: Sơ đồ ngữ cảnh hệ thống Auto-Wash [xem tệp ContextDiagram.drawio]', { run: { italics: true } }));
+children.push(...figart('Context', 'ContextDiagram_v2.drawio.png', 600, 306, 'Hình 1: Sơ đồ ngữ cảnh hệ thống Auto-Wash — nguồn: diagrams/ContextDiagram_v2.drawio.'));
 children.push(p('Sơ đồ ngữ cảnh xác định ranh giới hệ thống, các tác nhân và hệ thống ngoài cùng các luồng tương tác chính:'));
 children.push(table(
   ['Phần tử', 'Loại', 'Mô tả'],
@@ -191,12 +204,12 @@ children.push(table(
 ));
 
 children.push(h2('2.2 Sơ đồ thực thể (Entity Relationship Diagram)'));
-const erdPath = path.join(__dirname, '..', '..', 'diagrams', 'ERD.png');
+const erdPath = path.join(__dirname, '..', '..', 'diagrams', 'diagram picture', 'ERD', 'ERD.png');
 if (fs.existsSync(erdPath)) {
   children.push(new Paragraph({
     alignment: AlignmentType.CENTER,
     spacing: { after: 120 },
-    children: [ new ImageRun({ type: 'png', data: fs.readFileSync(erdPath), transformation: { width: 620, height: 418 } }) ],
+    children: [ new ImageRun({ type: 'png', data: fs.readFileSync(erdPath), transformation: { width: 540, height: 400 } }) ],
   }));
   children.push(p('Hình 2: Sơ đồ thực thể của hệ thống Auto-Wash (9 thực thể) — nguồn: diagrams/ERD.drawio.', { run: { italics: true } }));
 } else {
@@ -222,16 +235,33 @@ children.push(table(
 children.push(h2('2.3 Luồng nghiệp vụ (Workflow)'));
 children.push(h3('2.3.1 Quản lý tài khoản'));
 children.push(p('Khách hàng mới: truy cập Mobile Web → nhấn Đăng ký → nhập email → nhận email OTP (qua Email SMTP) → điền Họ tên, Số điện thoại, Mật khẩu, mã OTP → tài khoản được tạo → chuyển đến trang chủ.'));
-children.push(p('Khách hàng hiện hữu: nhập email/số điện thoại + mật khẩu → nhận OTP qua email → nhập OTP → session được tạo → chuyển đến trang chủ khách hàng.'));
-children.push(p('Nhân viên: nhập email + mật khẩu → nhận OTP qua email → nhập OTP → session được tạo → chuyển đến màn hình Quản lý hàng chờ. Nhân viên có thể mở màn hình Quản lý tài khoản để xem danh sách người dùng và kích hoạt/vô hiệu hóa tài khoản.'));
+children.push(p('Khách hàng hiện hữu: nhập email/số điện thoại + mật khẩu → hệ thống xác thực → session được tạo → chuyển đến trang chủ khách hàng (đăng nhập không dùng OTP).'));
+children.push(p('Nhân viên: nhập email + mật khẩu → hệ thống xác thực → session được tạo → chuyển đến màn hình Quản lý hàng chờ. Nhân viên có thể mở màn hình Quản lý tài khoản để xem danh sách người dùng và kích hoạt/vô hiệu hóa tài khoản.'));
 children.push(h3('2.3.2 Quản lý đặt lịch'));
 children.push(p('Khách hàng đăng nhập → đăng ký xe (xác thực OTP) → xem trang dịch vụ → chọn dịch vụ chính + dịch vụ bổ sung (tùy chọn) → chọn ngày giờ → xem lại giá → xác nhận đặt lịch → hệ thống gửi email xác nhận đặt lịch → nhân viên xác nhận booking → khách hàng đến trung tâm đúng lịch hẹn. Nhân viên có thể hủy booking khi khách hàng yêu cầu.'));
 children.push(h3('2.3.3 Quản lý hàng chờ'));
 children.push(p('Xe đến trung tâm → nhân viên nhấn quét biển số, hệ thống gửi yêu cầu chụp ảnh (request plate scan) đến Camera LPR → Camera chụp ảnh và gửi đến 3rd-party LPR API → 3rd-party LPR API trích xuất chuỗi biển số và trả về hệ thống (hoặc nhân viên nhập biển số thủ công) → hệ thống tự động phát hiện booking nếu có → tạo mục Queue (Status: Đang chờ) → nhân viên chuyển trạng thái qua các công đoạn: Quét LPR → Đang rửa → Xử lý add-on → Sấy khô → nhân viên check-out → thống kê khách hàng được cập nhật → hệ thống gửi email thông báo rửa xe hoàn tất.'));
 
+children.push(h3('2.3.4 Sơ đồ hoạt động (Activity Diagram)'));
+children.push(p('Sơ đồ hoạt động mô tả chi tiết luồng xử lý theo từng phân hệ (vẽ trục ngang; nguồn: diagrams/ActivityDiagrams.drawio).'));
+children.push(...figart('Activity', 'ActivityDiagrams-1. Account.drawio.png', 600, 168, 'Hình 10: Activity — Quản lý tài khoản.'));
+children.push(...figart('Activity', 'ActivityDiagrams-2. Vehicle.drawio.png', 600, 179, 'Hình 11: Activity — Quản lý phương tiện.'));
+children.push(...figart('Activity', 'ActivityDiagrams-3. Booking.drawio.png', 600, 250, 'Hình 12: Activity — Quản lý dịch vụ & đặt lịch.'));
+children.push(...figart('Activity', 'ActivityDiagrams-4. Queue.drawio.png', 600, 169, 'Hình 13: Activity — Quản lý hàng chờ.'));
+children.push(...figart('Activity', 'ActivityDiagrams-5. Administration - Notifications.drawio.png', 600, 247, 'Hình 14: Activity — Quản trị & Thông báo.'));
+children.push(h3('2.3.5 Sơ đồ phân làn (Swimlane Diagram)'));
+children.push(p('Cùng các luồng nhưng phân làn theo tác nhân: Customer / Staff / Auto-Wash System / Email SMTP (nguồn: diagrams/Swimlanes.drawio).'));
+children.push(...figart('SwimLane', 'Swimlanes-1. Account.drawio.png', 600, 222, 'Hình 15: Swimlane — Quản lý tài khoản.'));
+children.push(...figart('SwimLane', 'Swimlanes-2. Vehicle.drawio.png', 600, 184, 'Hình 16: Swimlane — Quản lý phương tiện.'));
+children.push(...figart('SwimLane', 'Swimlanes-3. Booking.drawio.png', 600, 199, 'Hình 17: Swimlane — Quản lý dịch vụ & đặt lịch.'));
+children.push(...figart('SwimLane', 'Swimlanes-4. Queue.drawio.png', 600, 159, 'Hình 18: Swimlane — Quản lý hàng chờ.'));
+children.push(...figart('SwimLane', 'Swimlanes-5. Administration - Notifications.drawio.png', 600, 156, 'Hình 19: Swimlane — Quản trị & Thông báo.'));
+children.push(h3('2.3.6 Sơ đồ luồng dữ liệu (Data Flow Diagram — Mức 1)'));
+children.push(...figart('DataFlow', 'DataFlowDiagram_Level1.drawio.png', 600, 301, 'Hình 20: Sơ đồ luồng dữ liệu mức 1 (DFD Level 1).'));
 children.push(h2('2.4 Sơ đồ chuyển trạng thái'));
+children.push(...figart('StateTransition', 'StateTransition.drawio.png', 600, 355, 'Hình 3: Sơ đồ chuyển trạng thái — Booking, Queue entry (composite In progress), OTP lifecycle (nguồn: diagrams/StateTransition.drawio).'));
 children.push(h3('2.4.1 Trạng thái đặt lịch (Booking)'));
-children.push(p('Hình 3: Sơ đồ chuyển trạng thái Booking [TBU — sẽ chèn sơ đồ]', { run: { italics: true } }));
+children.push(p('Bảng chi tiết chuyển trạng thái Booking (phần Booking của Hình 3):', { run: { italics: true } }));
 children.push(table(
   ['Trạng thái hiện tại', 'Sự kiện chuyển', 'Trạng thái kế tiếp'],
   [
@@ -244,7 +274,7 @@ children.push(table(
   [2600, 4026, 2400],
 ));
 children.push(h3('2.4.2 Trạng thái hàng chờ (Queue)'));
-children.push(p('Hình 4: Sơ đồ chuyển trạng thái Queue [TBU — sẽ chèn sơ đồ]', { run: { italics: true } }));
+children.push(p('Bảng chi tiết chuyển trạng thái hàng chờ (phần Queue của Hình 3):', { run: { italics: true } }));
 children.push(table(
   ['Trạng thái hiện tại', 'Sự kiện / điều kiện chuyển', 'Trạng thái kế tiếp'],
   [
@@ -263,7 +293,7 @@ children.push(h2('2.5 Sơ đồ Use Case'));
 children.push(p('Sơ đồ Use Case gồm 24 UC (UC1–UC24) tách theo 5 phân hệ, mỗi bong bóng gắn mã UC khớp Phần 3. Sub-use-case "Xác thực OTP qua email" là bước dùng chung («include»), không được đánh số. "Track queue progress" là nhánh con của UC13 (thể hiện bằng «extend»), không tính là UC độc lập.', { run: { italics: true } }));
 children.push(p('Ghi chú độ phủ: UC2 (Đăng xuất), UC10 (Xem dịch vụ) và UC16 (Xem hàng chờ hôm nay) là thao tác đọc/tầm thường nên chủ đích không vẽ Activity/Swimlane riêng; các UC này vẫn có mặt đầy đủ trên Use Case Diagram và Sơ đồ ngữ cảnh.', { run: { italics: true } }));
 children.push(h3('2.5.1 Chung & Quản lý tài khoản'));
-children.push(p('Hình 5: Sơ đồ Use Case — Chung & Quản lý tài khoản [TBU]', { run: { italics: true } }));
+children.push(...figart('UseCase', 'UseCaseDiagram-1. General & Account Management.drawio.png', 470, 304, 'Hình 5: Sơ đồ Use Case — Chung & Quản lý tài khoản.'));
 children.push(table(
   ['#', 'Tên UC', 'Mô tả'],
   [
@@ -278,7 +308,7 @@ children.push(table(
 ));
 children.push(p('Quan hệ: UC3, UC5 «include» sub-UC "Xác thực OTP qua email" (dùng chung, gửi mã qua Email SMTP). UC1 (Đăng nhập) chỉ dùng mật khẩu, không «include» OTP.', { run: { italics: true } }));
 children.push(h3('2.5.2 Quản lý phương tiện'));
-children.push(p('Hình 6: Sơ đồ Use Case — Quản lý phương tiện [TBU]', { run: { italics: true } }));
+children.push(...figart('UseCase', 'UseCaseDiagram-2. Vehicle Management.drawio.png', 470, 209, 'Hình 6: Sơ đồ Use Case — Quản lý phương tiện.'));
 children.push(table(
   ['#', 'Tên UC', 'Mô tả'],
   [
@@ -290,7 +320,7 @@ children.push(table(
 ));
 children.push(p('Quan hệ: UC8 «include» "Xác thực OTP qua email". UC9 «extend» UC7 — xóa xe là thao tác tùy chọn phát sinh từ danh sách xe.', { run: { italics: true } }));
 children.push(h3('2.5.3 Quản lý dịch vụ & đặt lịch'));
-children.push(p('Hình 7: Sơ đồ Use Case — Quản lý dịch vụ & đặt lịch [TBU]', { run: { italics: true } }));
+children.push(...figart('UseCase', 'UseCaseDiagram-3. Service & Booking Management.drawio.png', 470, 280, 'Hình 7: Sơ đồ Use Case — Quản lý dịch vụ & đặt lịch.'));
 children.push(table(
   ['#', 'Tên UC', 'Mô tả'],
   [
@@ -305,7 +335,7 @@ children.push(table(
 ));
 children.push(p('Quan hệ: sub-UC "Theo dõi tiến độ hàng chờ" «extend» UC13 — chỉ xuất hiện khi có booking đang hoạt động. UC12 gửi email xác nhận qua Email SMTP.', { run: { italics: true } }));
 children.push(h3('2.5.4 Quản lý hàng chờ'));
-children.push(p('Hình 8: Sơ đồ Use Case — Quản lý hàng chờ [TBU]', { run: { italics: true } }));
+children.push(...figart('UseCase', 'UseCaseDiagram-4. Queue Management.drawio.png', 470, 350, 'Hình 8: Sơ đồ Use Case — Quản lý hàng chờ.'));
 children.push(table(
   ['#', 'Tên UC', 'Mô tả'],
   [
@@ -321,7 +351,7 @@ children.push(table(
 ));
 children.push(p('Quan hệ: UC18 «extend» UC17 — quét LPR là phương án tùy chọn thay cho nhập biển số thủ công, kết nối Camera LPR và 3rd-party LPR API. UC21 gửi email hoàn tất qua Email SMTP.', { run: { italics: true } }));
 children.push(h3('2.5.5 Thông báo'));
-children.push(p('Hình 9: Sơ đồ Use Case — Thông báo [TBU]', { run: { italics: true } }));
+children.push(...figart('UseCase', 'UseCaseDiagram-5. Notification.drawio.png', 470, 249, 'Hình 9: Sơ đồ Use Case — Thông báo.'));
 children.push(table(
   ['#', 'Tên UC', 'Mô tả'],
   [
@@ -412,9 +442,9 @@ children.push(new Paragraph({ children: [new PageBreak()] }));
 children.push(h1('4. Màn hình Mockup'));
 children.push(h2('4.1 Sơ đồ luồng màn hình (Dialog Map)'));
 children.push(p('Sơ đồ luồng màn hình (dialog map) thể hiện toàn bộ màn hình và cách điều hướng giữa chúng: mỗi mũi tên là một hành động chuyển màn (nhấn nút, mở/đóng hộp thoại). Màn hình trung tâm (hub) tô đậm; hộp thoại vẽ nét đứt.', { run: { italics: true } }));
-const dmDir = path.join(__dirname, '..', '..', 'diagrams');
-[['4.1.1 Luồng màn hình — Khách hàng (Mobile Web)', 'DialogMap_Customer.png', 480, 285],
- ['4.1.2 Luồng màn hình — Nhân viên (Desktop)', 'DialogMap_Staff.png', 480, 206]].forEach(function (m) {
+const dmDir = path.join(__dirname, '..', '..', 'diagrams', 'diagram picture', 'DialogMap');
+[['4.1.1 Luồng màn hình — Khách hàng (Mobile Web)', 'DialogMap-1. Khách hàng (Mobile Web).drawio.png', 520, 224],
+ ['4.1.2 Luồng màn hình — Nhân viên (Desktop)', 'DialogMap-2. Nhân viên (Desktop).drawio.png', 540, 145]].forEach(function (m) {
   children.push(h3(m[0]));
   const dfp = path.join(dmDir, m[1]);
   if (fs.existsSync(dfp)) {
@@ -432,7 +462,7 @@ const mockups = [
   ['4.5 Quản lý hàng chờ', ['4.5.1 Bảng hàng chờ — Danh sách hôm nay', '4.5.2 Bảng hàng chờ — Chuyển trạng thái', '4.5.3 Bảng hàng chờ — Cập nhật / ghi chú', '4.5.4 Bảng hàng chờ — Hộp thoại Check-in (kèm nút Quét biển số)', '4.5.6 Bảng hàng chờ — Hộp thoại Check-out', '4.5.6 Bảng hàng chờ — Xác nhận hủy lượt']],
   ['4.6 Thông báo', ['4.6.1 Thông báo — Danh sách', '4.6.2 Thông báo — Chi tiết / đánh dấu đã đọc']],
 ];
-const mockDir = path.join(__dirname, '..', '..', 'diagrams', 'mockups');
+const mockDir = path.join(__dirname, '..', '..', 'diagrams', 'diagram picture', 'mockups');
 const P = [232, 390];   // phone size
 const D = [478, 326];   // desktop size
 const mockMap = {
@@ -704,7 +734,7 @@ const doc = new Document({
             new Paragraph({
               tabStops: [{ type: TabStopType.RIGHT, position: 9026 }],
               border: { bottom: { color: 'AAAAAA', space: 4, style: 'single', size: 4 } },
-              children: [ t('Auto-Wash — SRS v2.6', { size: 18, color: '666666' }),
+              children: [ t('Auto-Wash — SRS v2.8', { size: 18, color: '666666' }),
                           new TextRun({ text: '\tFPT University — SWP391', size: 18, color: '666666' }) ],
             }),
           ],
@@ -729,7 +759,7 @@ const doc = new Document({
 });
 
 Packer.toBuffer(doc).then((buf) => {
-  const outName = 'Auto-Wash_SRS_v2.6.docx';
+  const outName = 'Auto-Wash_SRS_v2.8.docx';
   fs.writeFileSync(outName, buf);
   console.log('Da tao', outName, '(' + buf.length + ' bytes)');
 });
