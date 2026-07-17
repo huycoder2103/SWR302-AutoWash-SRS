@@ -1,0 +1,184 @@
+<mxfile host="Electron" pages="2">
+  <diagram name="1. Khách hàng (Mobile Web)" id="cust">
+    <mxGraphModel dx="1400" dy="827" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cust_landing" parent="1" style="rounded=1;fillColor=#ecfdf5;strokeColor=#059669;fontStyle=1;whiteSpace=wrap;html=1;fontSize=12;" value="Trang chủ (Landing)" vertex="1">
+          <mxGeometry height="52" width="170" x="120" y="132" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_login" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Đăng nhập" vertex="1">
+          <mxGeometry height="52" width="170" x="220" y="319" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_register" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Đăng ký" vertex="1">
+          <mxGeometry height="52" width="170" x="20" y="319" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_regotp" parent="1" style="rounded=1;fillColor=#f5f3ff;strokeColor=#7c3aed;dashed=1;whiteSpace=wrap;html=1;fontSize=12;" value="Đăng ký — OTP" vertex="1">
+          <mxGeometry height="52" width="170" x="120" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_home" parent="1" style="rounded=1;fillColor=#e0e7ff;strokeColor=#1e40af;strokeWidth=2;fontStyle=1;whiteSpace=wrap;html=1;fontSize=12;" value="Trang chủ&amp;#10;khách hàng" vertex="1">
+          <mxGeometry height="70" width="180" x="480" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_services" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Danh sách dịch vụ" vertex="1">
+          <mxGeometry height="52" width="170" x="710" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_vehicles" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Xe của tôi" vertex="1">
+          <mxGeometry height="52" width="170" x="710" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_createbk" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Tạo đặt lịch" vertex="1">
+          <mxGeometry height="52" width="170" x="710" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_mybk" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Đặt lịch của tôi" vertex="1">
+          <mxGeometry height="52" width="170" x="710" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_notif" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Thông báo" vertex="1">
+          <mxGeometry height="52" width="170" x="710" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_profile" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Cài đặt hồ sơ" vertex="1">
+          <mxGeometry height="52" width="170" x="710" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_addveh" parent="1" style="rounded=1;fillColor=#f5f3ff;strokeColor=#7c3aed;dashed=1;whiteSpace=wrap;html=1;fontSize=12;" value="Thêm xe (OTP)" vertex="1">
+          <mxGeometry height="52" width="170" x="970" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_summary" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Tóm tắt &amp; xác nhận" vertex="1">
+          <mxGeometry height="52" width="170" x="970" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_notifd" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Chi tiết thông báo" vertex="1">
+          <mxGeometry height="52" width="170" x="970" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_chpass" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Đổi mật khẩu" vertex="1">
+          <mxGeometry height="52" width="170" x="970" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e1" edge="1" parent="1" source="cust_landing" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_login" value="Đăng nhập">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e2" edge="1" parent="1" source="cust_landing" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_register" value="Đăng ký">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e3" edge="1" parent="1" source="cust_register" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_regotp" value="Gửi OTP">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e4" edge="1" parent="1" source="cust_regotp" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_login" value="Tạo xong">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e5" edge="1" parent="1" source="cust_login" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_home" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e6" edge="1" parent="1" source="cust_home" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_services" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="106" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cust_e7" edge="1" parent="1" source="cust_home" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_vehicles" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cust_e8" edge="1" parent="1" source="cust_home" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_createbk" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e9" edge="1" parent="1" source="cust_home" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_mybk" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e10" edge="1" parent="1" source="cust_home" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_notif" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cust_e11" edge="1" parent="1" source="cust_home" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_profile" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="536" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cust_e12" edge="1" parent="1" source="cust_vehicles" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_addveh" value="Thêm xe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e13" edge="1" parent="1" source="cust_createbk" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_summary" value="Tiếp tục">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e14" edge="1" parent="1" source="cust_summary" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_mybk" value="Xác nhận">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e15" edge="1" parent="1" source="cust_notif" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_notifd" value="Mở">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cust_e16" edge="1" parent="1" source="cust_profile" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="cust_chpass" value="Đổi MK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="2. Nhân viên (Desktop)" id="staff">
+    <mxGraphModel dx="2333" dy="1378" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="staff_login" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Đăng nhập" vertex="1">
+          <mxGeometry height="52" width="170" x="90" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_queue" parent="1" style="rounded=1;fillColor=#e0e7ff;strokeColor=#1e40af;strokeWidth=2;fontStyle=1;whiteSpace=wrap;html=1;fontSize=12;" value="Bảng hàng chờ&amp;#10;hôm nay" vertex="1">
+          <mxGeometry height="72" width="180" x="370" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_pending" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Booking chờ xác nhận" vertex="1">
+          <mxGeometry height="52" width="170" x="660" y="178" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_services" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Quản lý dịch vụ" vertex="1">
+          <mxGeometry height="52" width="170" x="940" y="178" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_users" parent="1" style="rounded=1;fillColor=#eef2ff;strokeColor=#1e40af;whiteSpace=wrap;html=1;fontSize=12;" value="Quản lý tài khoản" vertex="1">
+          <mxGeometry height="52" width="170" x="940" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_checkin" parent="1" style="rounded=1;fillColor=#f5f3ff;strokeColor=#7c3aed;dashed=1;whiteSpace=wrap;html=1;fontSize=12;" value="Check-in (LPR)" vertex="1">
+          <mxGeometry height="52" width="170" x="100" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_advance" parent="1" style="rounded=1;fillColor=#f5f3ff;strokeColor=#7c3aed;dashed=1;whiteSpace=wrap;html=1;fontSize=12;" value="Chuyển trạng thái" vertex="1">
+          <mxGeometry height="52" width="170" x="290" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_update" parent="1" style="rounded=1;fillColor=#f5f3ff;strokeColor=#7c3aed;dashed=1;whiteSpace=wrap;html=1;fontSize=12;" value="Cập nhật lượt" vertex="1">
+          <mxGeometry height="52" width="170" x="480" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_checkout" parent="1" style="rounded=1;fillColor=#f5f3ff;strokeColor=#7c3aed;dashed=1;whiteSpace=wrap;html=1;fontSize=12;" value="Check-out" vertex="1">
+          <mxGeometry height="52" width="170" x="670" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_cancel" parent="1" style="rounded=1;fillColor=#f5f3ff;strokeColor=#7c3aed;dashed=1;whiteSpace=wrap;html=1;fontSize=12;" value="Hủy lượt" vertex="1">
+          <mxGeometry height="52" width="170" x="860" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_e1" edge="1" parent="1" source="staff_login" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="staff_queue" value="Đăng nhập OK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_e2" edge="1" parent="1" source="staff_queue" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;dashed=1;" target="staff_pending" value="điều hướng">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_e3" edge="1" parent="1" source="staff_pending" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;dashed=1;" target="staff_services" value="điều hướng">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_e4" edge="1" parent="1" source="staff_services" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;dashed=1;" target="staff_users" value="điều hướng">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_e5" edge="1" parent="1" source="staff_queue" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="staff_checkin" value="+ Check-in">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_e6" edge="1" parent="1" source="staff_queue" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="staff_advance" value="Chuyển tiếp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_e7" edge="1" parent="1" source="staff_queue" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="staff_update" value="Cập nhật">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_e8" edge="1" parent="1" source="staff_queue" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="staff_checkout" value="Check-out">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="staff_e9" edge="1" parent="1" source="staff_queue" style="endArrow=block;html=1;strokeColor=#475569;fontSize=10;rounded=1;" target="staff_cancel" value="Hủy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

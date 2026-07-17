@@ -20,7 +20,7 @@ children.push(
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: [t('(Software Requirements Specification)', { italics: true, size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: [t('Dành cho', { size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 480 }, children: [t('Auto-Wash — Hệ thống quản lý trung tâm rửa xe tự động', { bold: true, size: 32 })] }),
-  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [t('Phiên bản: 2.5 (đặc tả UC đầy đủ: bổ sung Luồng sự kiện chính + Luồng thay thế/ngoại lệ cho cả 24 UC)', { size: 24 })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [t('Phiên bản: 2.6 (bổ sung Dialog Map — luồng màn hình Khách hàng & Nhân viên vào mục 4)', { size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [t('TP. Hồ Chí Minh, tháng 7 năm 2026', { size: 24 })] }),
   new Paragraph({ children: [new PageBreak()] }),
 );
@@ -49,6 +49,7 @@ children.push(table(
     ['15/07/2026', '2.3', 'HoangHuy', 'Đồng bộ toàn bộ sơ đồ với SRS: (1) Use Case Diagram gắn mã UC1–UC24 và chú thích «Track queue progress» là nhánh con của UC13 (chốt đúng 24 UC); (2) Activity & Swimlane bổ sung nhánh kiểm tra chuyển trạng thái hàng chờ hợp lệ cho UC19 (khớp MSG31); (3) Sơ đồ ngữ cảnh bổ sung luồng view & mark notifications (UC23/UC24) cho Customer; (4) State Transition thêm ghi chú ràng buộc thứ tự công đoạn (UC19). Bổ sung mục 1.4.1 Bảng thuật ngữ nghiệp vụ chuẩn hóa (Glossary) và ghi chú các UC chủ đích không vẽ Activity (UC2, UC10, UC16).'],
     ['16/07/2026', '2.4', 'HoangHuy', 'Thay đổi nghiệp vụ: bỏ xác thực OTP khi đăng nhập — UC1 chỉ dùng định danh + mật khẩu. Cập nhật đồng bộ: Use Case Diagram bỏ «include» Login→Verify OTP; Activity & Swimlane rút gọn luồng B. Login (bỏ các bước sinh/gửi/nhập/kiểm tra OTP); State Transition đổi nguồn OTP thành UC3/UC5/UC8; mockup Đăng nhập bỏ ô OTP; Phụ lục ET1 và MSG4 bỏ tham chiếu UC1. OTP vẫn dùng cho UC3 (đăng ký), UC5 (đổi mật khẩu), UC8 (đăng ký xe).'],
     ['16/07/2026', '2.5', 'HoangHuy', 'Hoàn thiện Đặc tả Use Case (mục 3) cho cả 24 UC: đổi "Luồng hoạt động" thành "Luồng sự kiện chính" và bổ sung mục "Luồng thay thế / ngoại lệ" (tổng hợp các điều kiện lỗi/từ chối kèm cách xử lý) bên cạnh bảng Quy tắc nghiệp vụ. Không đổi nghiệp vụ; chỉ làm đầy đủ cấu trúc đặc tả UC.'],
+    ['16/07/2026', '2.6', 'HoangHuy', 'Bổ sung mục 4.1 Sơ đồ luồng màn hình (Dialog Map): hai sơ đồ Khách hàng (Mobile Web) và Nhân viên (Desktop) thể hiện điều hướng giữa 23 màn; danh mục mockup dời xuống 4.2–4.6. Nguồn: diagrams/DialogMap_Customer.drawio, diagrams/DialogMap_Staff.drawio.'],
   ],
   [1400, 1200, 1400, 5026],
 ));
@@ -409,40 +410,55 @@ children.push(new Paragraph({ children: [new PageBreak()] }));
 
 /* ---------------- 4. Mockup màn hình ---------------- */
 children.push(h1('4. Màn hình Mockup'));
+children.push(h2('4.1 Sơ đồ luồng màn hình (Dialog Map)'));
+children.push(p('Sơ đồ luồng màn hình (dialog map) thể hiện toàn bộ màn hình và cách điều hướng giữa chúng: mỗi mũi tên là một hành động chuyển màn (nhấn nút, mở/đóng hộp thoại). Màn hình trung tâm (hub) tô đậm; hộp thoại vẽ nét đứt.', { run: { italics: true } }));
+const dmDir = path.join(__dirname, '..', '..', 'diagrams');
+[['4.1.1 Luồng màn hình — Khách hàng (Mobile Web)', 'DialogMap_Customer.png', 480, 285],
+ ['4.1.2 Luồng màn hình — Nhân viên (Desktop)', 'DialogMap_Staff.png', 480, 206]].forEach(function (m) {
+  children.push(h3(m[0]));
+  const dfp = path.join(dmDir, m[1]);
+  if (fs.existsSync(dfp)) {
+    children.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 80 },
+      children: [ new ImageRun({ type: 'png', data: fs.readFileSync(dfp), transformation: { width: m[2], height: m[3] } }) ] }));
+    children.push(p('Nguồn: diagrams/DialogMap.drawio (' + (m[1].indexOf('Customer') >= 0 ? 'sheet 1 — Khách hàng' : 'sheet 2 — Nhân viên') + ').', { run: { italics: true, size: 18 } }));
+  } else {
+    children.push(p('[Dialog map — xem diagrams/DialogMap.drawio]', { run: { italics: true } }));
+  }
+});
 const mockups = [
-  ['4.1 Chung', ['4.1.1 Màn hình Đăng nhập', '4.1.2 Trang chủ (Landing Page)']],
-  ['4.2 Quản lý tài khoản & phương tiện', ['4.2.1 Màn hình Đăng ký', '4.2.2 Đăng ký — Xác thực OTP', '4.2.3 Cài đặt hồ sơ — Xem & chỉnh sửa', '4.2.4 Màn hình Đổi mật khẩu', '4.2.5 Xe của tôi — Danh sách', '4.2.6 Xe của tôi — Thêm xe (OTP)', '4.2.7 Quản lý tài khoản người dùng (Nhân viên)']],
-  ['4.3 Quản lý dịch vụ & đặt lịch', ['4.3.1 Màn hình Danh sách dịch vụ', '4.3.2 Quản lý dịch vụ (Nhân viên)', '4.3.3 Tạo đặt lịch — Chọn dịch vụ & ngày giờ', '4.3.4 Tạo đặt lịch — Tóm tắt & xác nhận', '4.3.5 Đặt lịch của tôi — Danh sách & theo dõi hàng chờ', '4.3.6 Danh sách booking chờ xác nhận (Nhân viên)']],
-  ['4.4 Quản lý hàng chờ', ['4.4.1 Bảng hàng chờ — Danh sách hôm nay', '4.4.2 Bảng hàng chờ — Chuyển trạng thái', '4.4.3 Bảng hàng chờ — Cập nhật / ghi chú', '4.4.4 Bảng hàng chờ — Hộp thoại Check-in (kèm nút Quét biển số)', '4.4.5 Bảng hàng chờ — Hộp thoại Check-out', '4.4.6 Bảng hàng chờ — Xác nhận hủy lượt']],
-  ['4.5 Thông báo', ['4.5.1 Thông báo — Danh sách', '4.5.2 Thông báo — Chi tiết / đánh dấu đã đọc']],
+  ['4.2 Chung', ['4.2.1 Màn hình Đăng nhập', '4.2.2 Trang chủ (Landing Page)']],
+  ['4.3 Quản lý tài khoản & phương tiện', ['4.3.1 Màn hình Đăng ký', '4.3.2 Đăng ký — Xác thực OTP', '4.3.3 Cài đặt hồ sơ — Xem & chỉnh sửa', '4.3.4 Màn hình Đổi mật khẩu', '4.3.5 Xe của tôi — Danh sách', '4.3.6 Xe của tôi — Thêm xe (OTP)', '4.3.7 Quản lý tài khoản người dùng (Nhân viên)']],
+  ['4.4 Quản lý dịch vụ & đặt lịch', ['4.4.2 Màn hình Danh sách dịch vụ', '4.4.3 Quản lý dịch vụ (Nhân viên)', '4.4.3 Tạo đặt lịch — Chọn dịch vụ & ngày giờ', '4.4.4 Tạo đặt lịch — Tóm tắt & xác nhận', '4.4.5 Đặt lịch của tôi — Danh sách & theo dõi hàng chờ', '4.4.6 Danh sách booking chờ xác nhận (Nhân viên)']],
+  ['4.5 Quản lý hàng chờ', ['4.5.1 Bảng hàng chờ — Danh sách hôm nay', '4.5.2 Bảng hàng chờ — Chuyển trạng thái', '4.5.3 Bảng hàng chờ — Cập nhật / ghi chú', '4.5.4 Bảng hàng chờ — Hộp thoại Check-in (kèm nút Quét biển số)', '4.5.6 Bảng hàng chờ — Hộp thoại Check-out', '4.5.6 Bảng hàng chờ — Xác nhận hủy lượt']],
+  ['4.6 Thông báo', ['4.6.1 Thông báo — Danh sách', '4.6.2 Thông báo — Chi tiết / đánh dấu đã đọc']],
 ];
 const mockDir = path.join(__dirname, '..', '..', 'diagrams', 'mockups');
 const P = [232, 390];   // phone size
 const D = [478, 326];   // desktop size
 const mockMap = {
-  '4.1.1 Màn hình Đăng nhập': ['login.png', ...P],
-  '4.1.2 Trang chủ (Landing Page)': ['landing.png', ...P],
-  '4.2.1 Màn hình Đăng ký': ['register.png', ...P],
-  '4.2.2 Đăng ký — Xác thực OTP': ['register_otp.png', ...P],
-  '4.2.3 Cài đặt hồ sơ — Xem & chỉnh sửa': ['profile.png', ...P],
-  '4.2.4 Màn hình Đổi mật khẩu': ['change_password.png', ...P],
-  '4.2.5 Xe của tôi — Danh sách': ['my_vehicles.png', ...P],
-  '4.2.6 Xe của tôi — Thêm xe (OTP)': ['add_vehicle_otp.png', ...P],
-  '4.2.7 Quản lý tài khoản người dùng (Nhân viên)': ['manage_users.png', ...D],
-  '4.3.1 Màn hình Danh sách dịch vụ': ['services_list.png', ...P],
-  '4.3.2 Quản lý dịch vụ (Nhân viên)': ['manage_services.png', ...D],
-  '4.3.3 Tạo đặt lịch — Chọn dịch vụ & ngày giờ': ['create_booking.png', ...P],
-  '4.3.4 Tạo đặt lịch — Tóm tắt & xác nhận': ['booking_summary.png', ...P],
-  '4.3.5 Đặt lịch của tôi — Danh sách & theo dõi hàng chờ': ['my_bookings.png', ...P],
-  '4.3.6 Danh sách booking chờ xác nhận (Nhân viên)': ['pending_bookings.png', ...D],
-  '4.4.1 Bảng hàng chờ — Danh sách hôm nay': ['staff_queue.png', ...D],
-  '4.4.2 Bảng hàng chờ — Chuyển trạng thái': ['advance_status.png', ...D],
-  '4.4.3 Bảng hàng chờ — Cập nhật / ghi chú': ['update_queue.png', ...D],
-  '4.4.4 Bảng hàng chờ — Hộp thoại Check-in (kèm nút Quét biển số)': ['checkin_dialog.png', ...D],
-  '4.4.5 Bảng hàng chờ — Hộp thoại Check-out': ['checkout_dialog.png', ...D],
-  '4.4.6 Bảng hàng chờ — Xác nhận hủy lượt': ['cancel_queue.png', ...D],
-  '4.5.1 Thông báo — Danh sách': ['notifications.png', ...P],
-  '4.5.2 Thông báo — Chi tiết / đánh dấu đã đọc': ['notification_detail.png', ...P],
+  '4.2.1 Màn hình Đăng nhập': ['login.png', ...P],
+  '4.2.2 Trang chủ (Landing Page)': ['landing.png', ...P],
+  '4.3.1 Màn hình Đăng ký': ['register.png', ...P],
+  '4.3.2 Đăng ký — Xác thực OTP': ['register_otp.png', ...P],
+  '4.3.3 Cài đặt hồ sơ — Xem & chỉnh sửa': ['profile.png', ...P],
+  '4.3.4 Màn hình Đổi mật khẩu': ['change_password.png', ...P],
+  '4.3.5 Xe của tôi — Danh sách': ['my_vehicles.png', ...P],
+  '4.3.6 Xe của tôi — Thêm xe (OTP)': ['add_vehicle_otp.png', ...P],
+  '4.3.7 Quản lý tài khoản người dùng (Nhân viên)': ['manage_users.png', ...D],
+  '4.4.2 Màn hình Danh sách dịch vụ': ['services_list.png', ...P],
+  '4.4.3 Quản lý dịch vụ (Nhân viên)': ['manage_services.png', ...D],
+  '4.4.3 Tạo đặt lịch — Chọn dịch vụ & ngày giờ': ['create_booking.png', ...P],
+  '4.4.4 Tạo đặt lịch — Tóm tắt & xác nhận': ['booking_summary.png', ...P],
+  '4.4.5 Đặt lịch của tôi — Danh sách & theo dõi hàng chờ': ['my_bookings.png', ...P],
+  '4.4.6 Danh sách booking chờ xác nhận (Nhân viên)': ['pending_bookings.png', ...D],
+  '4.5.1 Bảng hàng chờ — Danh sách hôm nay': ['staff_queue.png', ...D],
+  '4.5.2 Bảng hàng chờ — Chuyển trạng thái': ['advance_status.png', ...D],
+  '4.5.3 Bảng hàng chờ — Cập nhật / ghi chú': ['update_queue.png', ...D],
+  '4.5.4 Bảng hàng chờ — Hộp thoại Check-in (kèm nút Quét biển số)': ['checkin_dialog.png', ...D],
+  '4.5.6 Bảng hàng chờ — Hộp thoại Check-out': ['checkout_dialog.png', ...D],
+  '4.5.6 Bảng hàng chờ — Xác nhận hủy lượt': ['cancel_queue.png', ...D],
+  '4.6.1 Thông báo — Danh sách': ['notifications.png', ...P],
+  '4.6.2 Thông báo — Chi tiết / đánh dấu đã đọc': ['notification_detail.png', ...P],
 };
 mockups.forEach(([sec, items]) => {
   children.push(h2(sec));
@@ -688,7 +704,7 @@ const doc = new Document({
             new Paragraph({
               tabStops: [{ type: TabStopType.RIGHT, position: 9026 }],
               border: { bottom: { color: 'AAAAAA', space: 4, style: 'single', size: 4 } },
-              children: [ t('Auto-Wash — SRS v2.5', { size: 18, color: '666666' }),
+              children: [ t('Auto-Wash — SRS v2.6', { size: 18, color: '666666' }),
                           new TextRun({ text: '\tFPT University — SWP391', size: 18, color: '666666' }) ],
             }),
           ],
@@ -713,7 +729,7 @@ const doc = new Document({
 });
 
 Packer.toBuffer(doc).then((buf) => {
-  const outName = 'Auto-Wash_SRS_v2.5.docx';
+  const outName = 'Auto-Wash_SRS_v2.6.docx';
   fs.writeFileSync(outName, buf);
   console.log('Da tao', outName, '(' + buf.length + ' bytes)');
 });

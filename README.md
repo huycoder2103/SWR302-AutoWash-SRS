@@ -2,7 +2,7 @@
 
 Hệ thống quản lý trung tâm rửa xe tự động: khách hàng đặt lịch qua Mobile Web, nhân viên vận hành hàng chờ, nhận dạng biển số qua Camera LPR + 3rd-party LPR API, thông báo qua Email SMTP. Phạm vi gồm 5 service nội bộ: Account, Booking, Queue, Notification, LPR.
 
-Toàn bộ tài liệu trong folder này **đã đồng bộ với nhau** tính đến 16/07/2026 — bản chính thức: **SRS v2.5**.
+Toàn bộ tài liệu trong folder này **đã đồng bộ với nhau** tính đến 16/07/2026 — bản chính thức: **SRS v2.6**.
 
 ## Cấu trúc folder
 
@@ -11,7 +11,7 @@ Auto-Wash-Project/
 ├── README.md                          (file này)
 ├── Auto-Wash_Plan_CaiTien.xlsx        Kế hoạch cải tiến + ma trận truy vết + checklist đồng bộ
 ├── docs/
-│   └── Auto-Wash_SRS_v2.5.docx        SRS chính thức, tiếng Việt (bản dùng)
+│   └── Auto-Wash_SRS_v2.6.docx        SRS chính thức, tiếng Việt (bản dùng)
 ├── diagrams/
 │   ├── ContextDiagram_v2.drawio       Sơ đồ ngữ cảnh
 │   ├── UseCaseDiagram.drawio          Use case diagram (5 page, đã gắn mã UC1–UC24)
@@ -21,6 +21,9 @@ Auto-Wash-Project/
 │   ├── ERD.drawio                     Sơ đồ thực thể — 9 thực thể
 │   ├── ERD.png                        Ảnh ERD render sẵn (chèn vào SRS mục 2.2)
 │   ├── Mockups.html                   Gallery xem nhanh 23 mockup
+│   ├── DialogMap.drawio               Dialog map — 2 sheet: Khách hàng, Nhân viên
+│   ├── DialogMap_Customer.png         Ảnh sheet Khách hàng (chèn SRS 4.1.1)
+│   ├── DialogMap_Staff.png            Ảnh sheet Nhân viên (chèn SRS 4.1.2)
 │   └── mockups/                       PNG 23 màn mockup (nguồn chèn vào SRS mục 4)
 ├── legacy/                            Bản cũ, chỉ để tham chiếu
 │   ├── ContextDiagram_v1.drawio
@@ -28,21 +31,23 @@ Auto-Wash-Project/
 │   ├── Auto-Wash_SRS_v2.0.docx
 │   ├── Auto-Wash_SRS_v2.1.docx
 │   ├── Auto-Wash_SRS_v2.2.docx
-│   └── Auto-Wash_SRS_v2.3.docx
+│   ├── Auto-Wash_SRS_v2.3.docx
+│   ├── Auto-Wash_SRS_v2.4.docx
+│   └── Auto-Wash_SRS_v2.5.docx
 └── tools/srs-generator/               Script sinh file SRS docx
     ├── build.js  helpers.js  uc1.js  uc2.js
 ```
 
 ## Mô tả từng file
 
-### docs/Auto-Wash_SRS_v2.5.docx — tài liệu trung tâm
+### docs/Auto-Wash_SRS_v2.6.docx — tài liệu trung tâm
 
 SRS đầy đủ ~54 trang tiếng Việt, cấu trúc theo mẫu FA / IEEE 830:
 
 1. **Giới thiệu** — mục đích, phạm vi, đối tượng đọc, từ viết tắt, 1.4.1 Bảng thuật ngữ nghiệp vụ (Glossary), tài liệu tham khảo.
 2. **Yêu cầu tổng quát** — sơ đồ ngữ cảnh + bảng luồng tương tác, ERD 9 thực thể (đã chèn hình), workflow, 2 bảng chuyển trạng thái, bảng use case kèm ghi chú «include»/«extend», ma trận phân quyền.
 3. **Đặc tả 24 Use Case** — mỗi UC gồm: Mục tiêu, Tác nhân, Kích hoạt, Điều kiện tiên quyết, Kết quả, **Luồng sự kiện chính**, **Luồng thay thế / ngoại lệ**, **Quy tắc nghiệp vụ** (BR đánh số toàn cục).
-4. **Màn hình Mockup** — cả 23 màn đã chèn wireframe (xem nhanh tại `diagrams/Mockups.html`).
+4. **Màn hình Mockup** — 4.1 Sơ đồ luồng màn hình (Dialog Map: Khách hàng + Nhân viên); 4.2–4.6 cả 23 màn wireframe (xem nhanh tại `diagrams/Mockups.html`).
 5. **Yêu cầu phi chức năng** — hiệu năng, bảo mật, khả dụng, sẵn sàng/tin cậy, mở rộng.
 6. **Tích hợp** — Supabase PostgreSQL, Gmail SMTP/MailKit, LPR API, React Mobile Web.
 7. **Di trú dữ liệu**.
@@ -58,6 +63,7 @@ SRS đầy đủ ~54 trang tiếng Việt, cấu trúc theo mẫu FA / IEEE 830:
 - **v2.3** — đồng bộ toàn bộ sơ đồ: mã UC1–UC24, nhánh UC19, luồng notifications trên Context, ghi chú State, Glossary; vẽ ERD; tạo 23 mockup.
 - **v2.4** — bỏ OTP khi đăng nhập (UC1 chỉ dùng mật khẩu); đồng bộ UseCase/Activity/Swimlane/State/mockup/phụ lục.
 - **v2.5** — hoàn thiện đặc tả UC: mỗi UC có Luồng sự kiện chính + Luồng thay thế/ngoại lệ + Quy tắc nghiệp vụ.
+- **v2.6** — bổ sung mục 4.1 Dialog Map (luồng màn hình Khách hàng & Nhân viên); danh mục mockup dời xuống 4.2–4.6.
 
 ### diagrams/ContextDiagram_v2.drawio
 
@@ -91,7 +97,7 @@ Account, Customer, Vehicle, Booking, BookingService, Service, Queue, Notificatio
 
 ```
 npm install docx
-node build.js        # tạo Auto-Wash_SRS_v2.5.docx tại chỗ (tự chèn ERD.png + mockups/*.png nếu có)
+node build.js        # tạo Auto-Wash_SRS_v2.6.docx tại chỗ (tự chèn ERD.png + DialogMap_*.png + mockups/*.png nếu có)
 ```
 
 **Quan trọng:** muốn sửa nội dung SRS thì sửa các file `.js` rồi build lại, **đừng sửa tay file .docx** để tránh lệch nguồn.
@@ -109,9 +115,9 @@ node build.js        # tạo Auto-Wash_SRS_v2.5.docx tại chỗ (tự chèn ERD
 9. **Đồng bộ & hoàn thiện lên v2.3** (theo `Auto-Wash_Plan_CaiTien.xlsx`): mã UC1–UC24, nhánh UC19 trên Activity/Swimlane/State, luồng notifications trên Context, Glossary; vẽ ERD; tạo 23 mockup; chèn ERD + mockup vào SRS.
 10. **Bỏ OTP khi đăng nhập → v2.4:** UC1 chỉ dùng định danh + mật khẩu; đồng bộ UseCaseDiagram, Activity/Swimlane (rút gọn luồng Login), StateTransition, mockup Đăng nhập, ET1 và MSG4.
 11. **Hoàn thiện đặc tả UC → v2.5:** nâng `renderUC` để mỗi UC có Luồng sự kiện chính + Luồng thay thế/ngoại lệ + Quy tắc nghiệp vụ; build lại (đủ 24 UC spec, 24 hình).
+12. **Bổ sung Dialog Map → v2.6:** vẽ 2 sơ đồ luồng màn hình (Khách hàng Mobile Web, Nhân viên Desktop) gộp trong 1 file DialogMap.drawio (2 sheet) + 2 PNG; chèn vào SRS mục 4.1, dời danh mục mockup xuống 4.2–4.6; build lại (26 hình).
 
 ## Việc còn dở / gợi ý bước tiếp theo
 
-- Dọn `docs/Auto-Wash_SRS_v2.4.docx` vào `legacy/` sau khi đóng Word (đang mở nên chưa di chuyển được).
 - Các sơ đồ Context/UseCase/Activity/Swimlane/State trong SRS vẫn ghi [xem file drawio]: khi cần, export PNG từ drawio rồi map vào `build.js` giống ERD/mockup.
 - Khi đổi nghiệp vụ, sửa theo thứ tự: **ContextDiagram → UseCaseDiagram → Activity/Swimlane/StateTransition → SRS (qua srs-generator)** để giữ đồng bộ; luôn build lại và rà soát sau mỗi lần sửa.
