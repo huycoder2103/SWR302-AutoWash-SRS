@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auto-Wash — SRS &amp; Design Diagrams</title>
+<style>
+  :root{
+    --navy:#16294a;--navy2:#1f3864;--blue:#2563eb;--ink:#1e293b;--mut:#64748b;
+    --bg:#f4f6fa;--card:#ffffff;--line:#e5e9f0;--line2:#eef1f6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Segoe UI",Roboto,Arial,Helvetica,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+
+  header{background:linear-gradient(135deg,#0e1f3d 0%,#16294a 55%,#1f3864 100%);color:#fff;padding:56px 24px 48px;position:relative}
+  header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#2563eb,#38bdf8)}
+  .hwrap{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:22px}
+  .mark{width:66px;height:66px;border-radius:14px;border:1.5px solid rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;letter-spacing:1px;flex:none}
+  .htext h1{font-size:30px;font-weight:700;letter-spacing:.3px}
+  .htext .sub{font-size:16px;color:#c7d7f5;margin-top:3px}
+  .htext .meta{font-size:13px;color:#93a6c9;margin-top:8px;letter-spacing:.4px;text-transform:uppercase}
+
+  main{max-width:1080px;margin:0 auto;padding:44px 24px 30px}
+  .sec{display:flex;align-items:baseline;gap:14px;margin:0 0 20px}
+  .sec h2{font-size:15px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1.2px;white-space:nowrap}
+  .sec .rule{height:1px;background:var(--line);flex:1}
+  .sec .hint{font-size:12.5px;color:var(--mut);white-space:nowrap}
+  .sec.mt{margin-top:48px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 22px 18px;
+    display:flex;flex-direction:column;overflow:hidden;transition:transform .14s ease,box-shadow .14s ease,border-color .14s}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--navy2);opacity:.85}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(22,41,74,.13);border-color:#cdd7e8}
+  .card .num{position:absolute;top:14px;right:18px;font-size:26px;font-weight:800;color:#eef1f6;letter-spacing:-1px}
+  .card .tag{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
+  .card h3{font-size:17px;font-weight:700;color:var(--navy);margin:8px 0 6px}
+  .card p{font-size:13.5px;color:var(--mut);flex:1}
+  .card .go{margin-top:16px;font-size:13px;font-weight:700;letter-spacing:.3px;color:var(--blue)}
+
+  .docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .doc{position:relative;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;transition:.14s}
+  .doc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);opacity:.85}
+  .doc:hover{border-color:#cdd7e8;box-shadow:0 10px 26px rgba(22,41,74,.12)}
+  .doc .tag{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
+  .doc h3{font-size:16px;font-weight:700;color:var(--navy);margin:6px 0 4px}
+  .doc p{font-size:13px;color:var(--mut)}
+  .doc .go{margin-top:12px;font-size:13px;font-weight:700;color:var(--blue)}
+
+  footer{margin-top:46px;border-top:1px solid var(--line);background:#fff}
+  .fwrap{max-width:1080px;margin:0 auto;padding:26px 24px 40px;color:var(--mut);font-size:13px}
+  .fwrap .team{color:var(--ink);font-size:13.5px;line-height:1.9}
+  .fwrap .team b{color:var(--navy)}
+  .fwrap .deploy{margin-top:12px;font-size:12.5px}
+  .fwrap code{background:#eef2f8;padding:2px 7px;border-radius:5px;font-size:12px;color:var(--navy)}
+</style>
+</head>
+<body>
+<header>
+  <div class="hwrap">
+    <div class="mark">AW</div>
+    <div class="htext">
+      <h1>Auto-Wash</h1>
+      <div class="sub">Hệ thống quản lý trung tâm rửa xe tự động</div>
+      <div class="meta">Đặc tả Yêu cầu Phần mềm (SRS) · SWR302 · Bản v2.9</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="sec">
+    <h2>Sơ đồ thiết kế</h2><div class="rule"></div>
+    <span class="hint">Bấm để mở sơ đồ tương tác</span>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <div class="sec mt">
+    <h2>Tài liệu &amp; Trình chiếu</h2><div class="rule"></div>
+  </div>
+  <div class="docs" id="docs"></div>
+</main>
+
+<footer>
+  <div class="fwrap">
+    <div class="team">
+      <b>Nhóm thực hiện:</b> Nguyễn Hoàng Huy - SE190240 · Nguyễn Lê Thuận - SE190305 · Võ Lê Trung Nguyên - SE190220 · Nguyễn Thành Đạt - SE190239
+    </div>
+    <div class="deploy">Deploy GitHub Pages: Settings → Pages → Branch <code>main</code> → Folder <code>/ (root)</code>.</div>
+  </div>
+</footer>
+
+<script>
+  var diagrams=[
+    ['context.html','Tổng quan','Sơ đồ ngữ cảnh','Context Diagram — hệ thống, tác nhân, hệ thống ngoài'],
+    ['usecase.html','Chức năng','Sơ đồ Use Case','24 use case theo 5 phân hệ, quan hệ include/extend'],
+    ['erd.html','Dữ liệu','Sơ đồ thực thể (ERD)','9 thực thể và quan hệ dữ liệu'],
+    ['state.html','Hành vi','Sơ đồ chuyển trạng thái','Booking · Queue · OTP lifecycle'],
+    ['activity.html','Hành vi','Sơ đồ hoạt động','Activity Diagram — 5 phân hệ'],
+    ['swimlane.html','Hành vi','Sơ đồ phân làn','Swimlane — phân làn theo tác nhân'],
+    ['dataflow.html','Dữ liệu','Sơ đồ luồng dữ liệu','Data Flow Diagram — mức 1'],
+    ['dialogmap.html','Giao diện','Dialog Map','Luồng màn hình: Khách hàng &amp; Nhân viên'],
+    ['mockups.html','Giao diện','Mockup giao diện','23 màn hình wireframe']
+  ];
+  var g=document.getElementById('grid');
+  diagrams.forEach(function(d,i){
+    var a=document.createElement('a');
+    a.href='diagrams-html/'+d[0];a.target='_blank';a.className='card';
+    var num=('0'+(i+1)).slice(-2);
+    a.innerHTML='<span class="num">'+num+'</span><span class="tag">'+d[1]+'</span>'+
+      '<h3>'+d[2]+'</h3><p>'+d[3]+'</p><span class="go">Xem sơ đồ →</span>';
+    g.appendChild(a);
+  });
+  var docs=[
+    ['docs/Auto-Wash_SRS_v2.9.pdf','PDF','Tài liệu SRS','~61 trang · 8 mục · 44 hình · mở trực tiếp trên trình duyệt',true,'Mở tài liệu →'],
+    ['thuyet-trinh/Slide_ThuyetTrinh_AutoWash.html','Slide','Slide thuyết trình','25 slide · kiểu PowerPoint',true,'Trình chiếu →']
+  ];
+  var dd=document.getElementById('docs');
+  docs.forEach(function(d){
+    var a=document.createElement('a');
+    a.href=d[0];if(d[4])a.target='_blank';a.className='doc';
+    a.innerHTML='<span class="tag">'+d[1]+'</span><h3>'+d[2]+'</h3><p>'+d[3]+'</p><span class="go">'+d[5]+'</span>';
+    dd.appendChild(a);
+  });
+</script>
+</body>
+</html>

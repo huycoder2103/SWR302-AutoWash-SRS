@@ -1,7 +1,7 @@
 const fs = require('fs');
 const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, LevelFormat,
-  TableOfContents, PageBreak, PageNumber, Header, Footer, TabStopType, TabStopPosition,
+  TableOfContents, PageBreak, PageNumber, Header, Footer, TabStopType, TabStopPosition, LeaderType,
   ImageRun,
 } = require('docx');
 const path = require('path');
@@ -26,7 +26,7 @@ function figart(sub, file, w, h, caption) {
 
 /* ---------------- Title page ---------------- */
 children.push(
-  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 2000, after: 240 }, children: [t('FPT University — SWP391', { bold: true, size: 28 })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 2000, after: 240 }, children: [t('FPT University — SWR302', { bold: true, size: 28 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: [t('TÀI LIỆU ĐẶC TẢ YÊU CẦU PHẦN MỀM', { bold: true, size: 40 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: [t('(Software Requirements Specification)', { italics: true, size: 24 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 240 }, children: [t('Dành cho', { size: 24 })] }),
@@ -49,29 +49,26 @@ children.push(table(
   [2000, 2400, 2626, 2000],
 ));
 children.push(spacer());
-children.push(h1('Lịch sử sửa đổi'));
-children.push(table(
-  ['Ngày', 'Phiên bản', 'Tác giả', 'Mô tả thay đổi'],
-  [
-    ['06/06/2026', '1.0', 'HoangHuy', 'Khởi tạo — SRS đầy đủ cho Auto-Wash v2'],
-    ['08/07/2026', '2.0', 'HoangHuy', 'Viết lại toàn bộ theo Sơ đồ ngữ cảnh mới: giới hạn phạm vi trong 5 dịch vụ (Account, Booking, Queue, Notification, LPR); loại bỏ chương trình khách hàng thân thiết (điểm, hạng thành viên), voucher, chiến dịch khuyến mãi, dashboard quản trị và Google OAuth; bổ sung tích hợp Camera LPR và các chức năng Quản lý dịch vụ, Quản lý tài khoản, Xác nhận/Hủy đặt lịch cho nhân viên. Đồng bộ theo ContextDiagram_v2: đổi tên hệ thống ngoài thành "3rd-party LPR API", bổ sung luồng request plate scan và các luồng phản hồi cho khách hàng.'],
-    ['11/07/2026', '2.1', 'HoangHuy', 'Đồng bộ theo Use Case Diagram chuẩn hóa: UC1 bổ sung xác thực OTP hai lớp khi đăng nhập (luồng, BR, MSG, ET cập nhật theo); mục 2.5 bổ sung ghi chú quan hệ «include»/«extend» cho từng phân hệ. Sơ đồ ngữ cảnh bổ sung luồng update queue status, view vehicles & services, manage account (bảng 2.1 cập nhật theo). Đồng bộ theo Activity/Swimlane Diagrams: UC3 bổ sung điều hướng sang Đăng nhập khi email đã tồn tại; UC12 bổ sung bước xem tóm tắt và xác nhận trước khi lưu.'],
-    ['12/07/2026', '2.2', 'HoangHuy', 'Rà soát và bổ sung nhánh lỗi/ngoại lệ còn thiếu cho phần 3 (24 UC), đối chiếu với các tình huống biên đã liệt kê ở Activity/Swimlane Diagrams: UC1 chặn đăng nhập khi tài khoản bị vô hiệu hóa (MSG26); UC6 hiển thị thông báo khi cố tự khóa tài khoản (MSG27); UC12 kiểm tra và chặn tạo đặt lịch khi khách hàng chưa có xe (MSG28); UC14 xử lý tranh chấp trạng thái đồng thời khi xác nhận booking (MSG29); UC15 hiển thị thông báo khi hủy booking sai trạng thái (MSG30); UC19 hiển thị thông báo khi chuyển trạng thái không hợp lệ (MSG31); UC11 hiển thị thông báo khi giá/thời lượng dịch vụ không hợp lệ (MSG32). Phụ lục 8.1 bổ sung MSG26–MSG32.'],
-    ['15/07/2026', '2.3', 'HoangHuy', 'Đồng bộ toàn bộ sơ đồ với SRS: (1) Use Case Diagram gắn mã UC1–UC24 và chú thích «Track queue progress» là nhánh con của UC13 (chốt đúng 24 UC); (2) Activity & Swimlane bổ sung nhánh kiểm tra chuyển trạng thái hàng chờ hợp lệ cho UC19 (khớp MSG31); (3) Sơ đồ ngữ cảnh bổ sung luồng view & mark notifications (UC23/UC24) cho Customer; (4) State Transition thêm ghi chú ràng buộc thứ tự công đoạn (UC19). Bổ sung mục 1.4.1 Bảng thuật ngữ nghiệp vụ chuẩn hóa (Glossary) và ghi chú các UC chủ đích không vẽ Activity (UC2, UC10, UC16).'],
-    ['16/07/2026', '2.4', 'HoangHuy', 'Thay đổi nghiệp vụ: bỏ xác thực OTP khi đăng nhập — UC1 chỉ dùng định danh + mật khẩu. Cập nhật đồng bộ: Use Case Diagram bỏ «include» Login→Verify OTP; Activity & Swimlane rút gọn luồng B. Login (bỏ các bước sinh/gửi/nhập/kiểm tra OTP); State Transition đổi nguồn OTP thành UC3/UC5/UC8; mockup Đăng nhập bỏ ô OTP; Phụ lục ET1 và MSG4 bỏ tham chiếu UC1. OTP vẫn dùng cho UC3 (đăng ký), UC5 (đổi mật khẩu), UC8 (đăng ký xe).'],
-    ['16/07/2026', '2.5', 'HoangHuy', 'Hoàn thiện Đặc tả Use Case (mục 3) cho cả 24 UC: đổi "Luồng hoạt động" thành "Luồng sự kiện chính" và bổ sung mục "Luồng thay thế / ngoại lệ" (tổng hợp các điều kiện lỗi/từ chối kèm cách xử lý) bên cạnh bảng Quy tắc nghiệp vụ. Không đổi nghiệp vụ; chỉ làm đầy đủ cấu trúc đặc tả UC.'],
-    ['16/07/2026', '2.6', 'HoangHuy', 'Bổ sung mục 4.1 Sơ đồ luồng màn hình (Dialog Map): hai sơ đồ Khách hàng (Mobile Web) và Nhân viên (Desktop) thể hiện điều hướng giữa 23 màn; danh mục mockup dời xuống 4.2–4.6. Nguồn: diagrams/DialogMap_Customer.drawio, diagrams/DialogMap_Staff.drawio.'],
-    ['17/07/2026', '2.7', 'HoangHuy', 'Chèn ảnh sơ đồ (xuất từ drawio) vào mục 2: Hình 1 Sơ đồ ngữ cảnh, Hình 2 ERD, Hình 3 Chuyển trạng thái (Booking/Queue/OTP), Hình 5–9 Use Case 5 phân hệ; xóa toàn bộ [TBU] hình trong mục 2.'],
-    ['17/07/2026', '2.8', 'HoangHuy', 'Chèn nốt các sơ đồ còn lại (xuất từ drawio): mục 2.3 thêm 2.3.4 Activity (5 hình), 2.3.5 Swimlane (5 hình), 2.3.6 Data Flow (1 hình). Sửa văn bản 2.3.1: đăng nhập không dùng OTP. SRS nay thể hiện đầy đủ toàn bộ sơ đồ.'],
-    ['17/07/2026', '2.9', 'HoangHuy', 'Đánh số lại toàn bộ hình theo đúng thứ tự xuất hiện: Hình 1 Context, 2 ERD, 3–7 Activity, 8–12 Swimlane, 13 DFD, 14 State, 15–19 Use Case.'],
-  ],
-  [1400, 1200, 1400, 5026],
-));
 children.push(new Paragraph({ children: [new PageBreak()] }));
 
 /* ---------------- TOC ---------------- */
 children.push(h1('Mục lục'));
-children.push(new TableOfContents('Mục lục', { hyperlink: true, headingStyleRange: '1-3' }));
+const _tocPath = path.join(__dirname, 'toc.json');
+if (fs.existsSync(_tocPath)) {
+  const _entries = JSON.parse(fs.readFileSync(_tocPath, 'utf8'));
+  _entries.forEach(function (e) {
+    const lvl1 = e.level === 1;
+    children.push(new Paragraph({
+      tabStops: [{ type: TabStopType.RIGHT, position: 9026, leader: LeaderType.DOT }],
+      indent: { left: lvl1 ? 0 : 360 },
+      spacing: { before: lvl1 ? 80 : 20, after: lvl1 ? 20 : 10 },
+      children: [ t(e.text, { bold: lvl1, size: lvl1 ? 24 : 22 }),
+                  new TextRun({ text: '\t' + (e.page || ''), bold: lvl1, size: lvl1 ? 24 : 22 }) ],
+    }));
+  });
+} else {
+  children.push(p('(Mục lục sẽ được tạo tự động.)', { run: { italics: true } }));
+}
 children.push(new Paragraph({ children: [new PageBreak()] }));
 
 /* ---------------- 1. Giới thiệu ---------------- */
@@ -162,6 +159,20 @@ children.push(bullet('FA Management Requirement Specification (FPT Fresher Acade
 children.push(bullet('Auto-Wash Backend — ASP.NET Core 8, Entity Framework Core, PostgreSQL (Supabase).'));
 children.push(bullet('Auto-Wash Frontend Mobile Web — React + Vite.'));
 children.push(bullet('IEEE 830-1998: Recommended Practice for Software Requirements Specifications.'));
+children.push(h2('1.6 Giả định và phụ thuộc'));
+children.push(bullet('Khách hàng có địa chỉ email hợp lệ để nhận OTP (đăng ký, đổi mật khẩu, đăng ký xe) và email thông báo.'));
+children.push(bullet('Mỗi xe có một biển số duy nhất, đọc được bằng camera trong điều kiện ánh sáng bình thường.'));
+children.push(bullet('Dịch vụ 3rd-party LPR API sẵn sàng và trả kết quả trong thời gian chấp nhận được; khi lỗi, nhân viên nhập biển số thủ công.'));
+children.push(bullet('Máy chủ Email SMTP (Gmail) hoạt động ổn định để gửi OTP và thông báo.'));
+children.push(bullet('Hạ tầng Supabase PostgreSQL và môi trường triển khai (backend ASP.NET Core, frontend React) luôn khả dụng trong giờ vận hành.'));
+children.push(bullet('Nhân viên được đào tạo thao tác trên màn hình quản lý hàng chờ; mỗi trung tâm có ít nhất một tài khoản Nhân viên đang hoạt động.'));
+children.push(h2('1.7 Ràng buộc'));
+children.push(bullet('Kênh khách hàng là Mobile Web (React + Vite); không phát triển ứng dụng di động gốc trong phạm vi này.'));
+children.push(bullet('Backend dùng ASP.NET Core 8 + Entity Framework Core; CSDL PostgreSQL trên Supabase.'));
+children.push(bullet('Xác thực dùng session phía máy chủ (không JWT/stateless token trong phiên bản này).'));
+children.push(bullet('Chỉ hỗ trợ một trung tâm rửa xe; đa chi nhánh nằm ngoài phạm vi.'));
+children.push(bullet('Thanh toán tiền mặt tại quầy; không tích hợp cổng thanh toán trực tuyến.'));
+children.push(bullet('Ngôn ngữ giao diện: tiếng Việt.'));
 children.push(new Paragraph({ children: [new PageBreak()] }));
 
 /* ---------------- 2. Yêu cầu tổng quát ---------------- */
@@ -232,6 +243,36 @@ children.push(table(
   ],
   [1700, 4326, 3000],
 ));
+children.push(h3('2.2.1 Từ điển dữ liệu (Data Dictionary)'));
+children.push(p('Mô tả chi tiết các trường của 9 thực thể: kiểu dữ liệu, ràng buộc và ý nghĩa.'));
+children.push(p("Account", { run: { bold: true } }));
+children.push(table(['Trường','Kiểu dữ liệu','Ràng buộc','Mô tả'], [["AccountId", "int", "PK, tự tăng", "Định danh tài khoản"], ["Email", "varchar(255)", "Duy nhất, không rỗng", "Email đăng nhập & nhận OTP"], ["Phone", "varchar(15)", "Duy nhất", "Số điện thoại"], ["PasswordHash", "varchar", "Không rỗng", "Mật khẩu đã băm (bcrypt)"], ["FullName", "nvarchar(120)", "", "Họ tên người dùng"], ["Role", "tinyint", "1=Nhân viên, 2=Khách hàng", "Vai trò tài khoản"], ["IsActive", "bool", "Mặc định true", "Trạng thái hoạt động (false = bị vô hiệu hóa)"]], [1900,1600,2200,3326]));
+children.push(spacer());
+children.push(p("Customer", { run: { bold: true } }));
+children.push(table(['Trường','Kiểu dữ liệu','Ràng buộc','Mô tả'], [["CustomerId", "int", "PK", "Định danh khách hàng"], ["AccountId", "int", "FK→Account, duy nhất", "Tài khoản tương ứng"], ["TotalVisits", "int", "Mặc định 0", "Tổng số lượt rửa đã hoàn tất"], ["TotalSpend", "decimal(12,0)", "Mặc định 0", "Tổng chi tiêu (VND)"], ["LastVisitAt", "datetime", "Nullable", "Thời điểm rửa gần nhất"]], [1900,1600,2200,3326]));
+children.push(spacer());
+children.push(p("Vehicle", { run: { bold: true } }));
+children.push(table(['Trường','Kiểu dữ liệu','Ràng buộc','Mô tả'], [["VehicleId", "int", "PK", "Định danh xe"], ["CustomerId", "int", "FK→Customer", "Chủ sở hữu xe"], ["LicensePlate", "varchar(15)", "Chuẩn hóa, không rỗng", "Biển số (định dạng VN)"], ["Brand", "nvarchar(60)", "", "Hãng xe"], ["Name", "nvarchar(60)", "", "Tên/dòng xe"], ["RegisteredAt", "datetime", "", "Thời điểm đăng ký xe"]], [1900,1600,2200,3326]));
+children.push(spacer());
+children.push(p("Booking", { run: { bold: true } }));
+children.push(table(['Trường','Kiểu dữ liệu','Ràng buộc','Mô tả'], [["BookingId", "int", "PK", "Định danh đặt lịch"], ["CustomerId", "int", "FK→Customer", "Khách đặt"], ["VehicleId", "int", "FK→Vehicle", "Xe được đặt"], ["ScheduledAt", "datetime", "≥ hiện tại + 15 phút", "Thời điểm hẹn"], ["Status", "tinyint", "1=Pending…5=Cancelled", "Trạng thái đặt lịch"], ["BasePrice", "decimal(12,0)", "≥ 0", "Tổng giá dịch vụ gốc"], ["FinalPrice", "decimal(12,0)", "≥ 0", "Thành tiền cuối"]], [1900,1600,2200,3326]));
+children.push(spacer());
+children.push(p("BookingService", { run: { bold: true } }));
+children.push(table(['Trường','Kiểu dữ liệu','Ràng buộc','Mô tả'], [["BookingServiceId", "int", "PK", "Định danh dòng dịch vụ"], ["BookingId", "int", "FK→Booking", "Đặt lịch chứa dịch vụ"], ["ServiceId", "int", "FK→Service", "Dịch vụ được chọn"], ["PriceSnapshot", "decimal(12,0)", "≥ 0", "Giá dịch vụ tại thời điểm đặt"]], [1900,1600,2200,3326]));
+children.push(spacer());
+children.push(p("Service", { run: { bold: true } }));
+children.push(table(['Trường','Kiểu dữ liệu','Ràng buộc','Mô tả'], [["ServiceId", "int", "PK", "Định danh dịch vụ"], ["ServiceName", "nvarchar(120)", "Không rỗng", "Tên dịch vụ"], ["Category", "tinyint", "1=Cơ bản…4=AddOn", "Nhóm dịch vụ"], ["BasePrice", "decimal(12,0)", "≥ 0", "Giá cơ bản"], ["EstimatedMinutes", "int", "≥ 1", "Thời lượng dự kiến (phút)"], ["IsAddOn", "bool", "", "Là dịch vụ bổ sung"], ["IsActive", "bool", "Mặc định true", "Còn kinh doanh (false = ngừng)"]], [1900,1600,2200,3326]));
+children.push(spacer());
+children.push(p("Queue", { run: { bold: true } }));
+children.push(table(['Trường','Kiểu dữ liệu','Ràng buộc','Mô tả'], [["QueueId", "int", "PK", "Định danh lượt hàng chờ"], ["BookingId", "int", "FK→Booking, nullable", "Booking liên kết (null nếu walk-in)"], ["VehicleId", "int", "FK→Vehicle, nullable", "Xe"], ["CustomerId", "int", "FK→Customer, nullable", "Khách"], ["LicensePlate", "varchar(15)", "", "Biển số ghi nhận khi check-in"], ["Status", "varchar(20)", "Waiting…Completed/Cancelled", "Công đoạn hiện tại"], ["Position", "int", "FIFO", "Thứ tự trong hàng chờ"], ["CheckInAt", "datetime", "", "Thời điểm check-in"], ["StartedAt", "datetime", "Nullable", "Bắt đầu rửa"], ["CompletedAt", "datetime", "Nullable", "Hoàn tất"], ["StaffNote", "nvarchar(255)", "Nullable", "Ghi chú của nhân viên"]], [1900,1600,2200,3326]));
+children.push(spacer());
+children.push(p("Notification", { run: { bold: true } }));
+children.push(table(['Trường','Kiểu dữ liệu','Ràng buộc','Mô tả'], [["NotificationId", "int", "PK", "Định danh thông báo"], ["CustomerId", "int", "FK→Customer", "Người nhận"], ["Title", "nvarchar(150)", "", "Tiêu đề"], ["Message", "nvarchar(500)", "", "Nội dung"], ["Type", "varchar(30)", "", "Loại (OTP, xác nhận, hoàn tất…)"], ["IsRead", "bool", "Mặc định false", "Đã đọc hay chưa"], ["CreatedAt", "datetime", "", "Thời điểm tạo"]], [1900,1600,2200,3326]));
+children.push(spacer());
+children.push(p("OtpVerification", { run: { bold: true } }));
+children.push(table(['Trường','Kiểu dữ liệu','Ràng buộc','Mô tả'], [["OtpId", "int", "PK", "Định danh OTP"], ["Email", "varchar(255)", "Không rỗng", "Email nhận OTP"], ["Code", "varchar", "Băm", "Mã OTP (lưu dạng băm)"], ["ExpiresAt", "datetime", "Hiệu lực 5 phút", "Thời điểm hết hạn"], ["IsUsed", "bool", "Mặc định false", "Đã sử dụng"], ["CreatedAt", "datetime", "", "Thời điểm sinh mã"]], [1900,1600,2200,3326]));
+children.push(spacer());
+
 
 children.push(h2('2.3 Luồng nghiệp vụ (Workflow)'));
 children.push(h3('2.3.1 Quản lý tài khoản'));
@@ -564,6 +605,32 @@ children.push(table(
 ));
 children.push(h2('5.5 Yêu cầu mở rộng (Scalability)'));
 children.push(p('Hệ thống xây dựng trên Supabase PostgreSQL, hỗ trợ mở rộng. Backend ASP.NET Core không lưu trạng thái phía ứng dụng (session lưu phía máy chủ), cho phép triển khai cân bằng tải trong tương lai. Hệ thống được thiết kế ban đầu cho một trung tâm rửa xe; hỗ trợ đa chi nhánh nằm ngoài phạm vi phiên bản này.'));
+children.push(h2('5.6 Yêu cầu khả năng bảo trì (Maintainability)'));
+children.push(table(['Yêu cầu','Mô tả'],[
+  ['Kiến trúc phân tầng','Tách rõ tầng trình bày, nghiệp vụ và truy cập dữ liệu để dễ sửa/mở rộng.'],
+  ['Quy ước mã nguồn','Tuân theo quy ước đặt tên và định dạng nhất quán; có kiểm thử cho các quy tắc nghiệp vụ quan trọng.'],
+  ['Nhật ký & giám sát','Ghi log lỗi và các sự kiện quan trọng (đăng nhập thất bại, gọi LPR, gửi email) để chẩn đoán.'],
+  ['Tài liệu đồng bộ','SRS và sơ đồ sinh/cập nhật từ một nguồn (srs-generator) để tránh lệch nguồn khi bảo trì.'],
+],[2400,6626]));
+children.push(h2('5.7 Yêu cầu khả chuyển (Portability)'));
+children.push(table(['Yêu cầu','Mô tả'],[
+  ['Trình duyệt','Chạy trên các trình duyệt hiện đại: Chrome, Edge, Firefox, Safari (bản mới).'],
+  ['Thiết bị','Mobile Web cho khách hàng (≥ 375px); desktop cho nhân viên (≥ 1024px).'],
+  ['Môi trường triển khai','Backend đóng gói độc lập, cấu hình qua biến môi trường; có thể triển khai trên nhiều nhà cung cấp hạ tầng.'],
+],[2400,6626]));
+children.push(h2('5.8 Yêu cầu tuân thủ'));
+children.push(bullet('Bảo vệ dữ liệu cá nhân: chỉ thu thập thông tin cần thiết (email, SĐT, họ tên, biển số); không chia sẻ cho bên thứ ba ngoài mục đích vận hành.'));
+children.push(bullet('Truyền dữ liệu an toàn qua HTTPS; thông tin bí mật lưu trong biến môi trường.'));
+children.push(bullet('Tuân thủ điều khoản sử dụng của dịch vụ 3rd-party LPR API và Gmail SMTP.'));
+children.push(h2('5.9 Yêu cầu giao diện ngoài (External Interfaces)'));
+children.push(p('Giao diện người dùng: ', { run: { bold: true } }));
+children.push(p('Mobile Web (React) cho khách hàng và giao diện desktop cho nhân viên; bố cục, thông điệp và luồng thao tác mô tả tại Phần 4 (Mockup) và Sơ đồ luồng màn hình (mục 4.1).'));
+children.push(p('Giao diện phần cứng: ', { run: { bold: true } }));
+children.push(p('Camera LPR đặt tại lối vào để chụp ảnh biển số theo yêu cầu của hệ thống (request plate scan).'));
+children.push(p('Giao diện phần mềm: ', { run: { bold: true } }));
+children.push(p('3rd-party LPR API (nhận ảnh, trả chuỗi biển số qua HTTPS/JSON); Gmail SMTP/MailKit (gửi email OTP, xác nhận, hoàn tất); Supabase PostgreSQL (lưu trữ dữ liệu).'));
+children.push(p('Giao diện truyền thông: ', { run: { bold: true } }));
+children.push(p('Frontend ↔ Backend qua JSON REST API trên HTTPS; Backend ↔ Email SMTP qua SMTP (STARTTLS, cổng 587); Backend ↔ LPR API qua HTTPS.'));
 children.push(new Paragraph({ children: [new PageBreak()] }));
 
 /* ---------------- 6. Tích hợp ---------------- */
@@ -736,7 +803,7 @@ const doc = new Document({
               tabStops: [{ type: TabStopType.RIGHT, position: 9026 }],
               border: { bottom: { color: 'AAAAAA', space: 4, style: 'single', size: 4 } },
               children: [ t('Auto-Wash — SRS v2.9', { size: 18, color: '666666' }),
-                          new TextRun({ text: '\tFPT University — SWP391', size: 18, color: '666666' }) ],
+                          new TextRun({ text: '\tFPT University — SWR302', size: 18, color: '666666' }) ],
             }),
           ],
         }),
