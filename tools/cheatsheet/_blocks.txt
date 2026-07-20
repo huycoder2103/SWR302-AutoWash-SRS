@@ -1,0 +1,37 @@
+SLIDE 1 — Auto-Wash (Huy · 15 giây)
+@@@
+SLIDE 2 — Background & Purpose (Huy · 30 giây)
+@@@
+SLIDE 3 — Technology Architecture (Huy · 20 giây)
+@@@
+SLIDE 4 — Actors & External Systems (Huy · 25 giây)
+@@@
+SLIDE 5 — Context Diagram (Huy · 40 giây)
+@@@
+SLIDE 5 → UC3 ĐĂNG KÝ TÀI KHOẢN (Huy · 95 giây)
+@@@
+CHUYỂN GIAO — Huy → Nguyên
+@@@
+SLIDE 6 & 7 — ERD 9 thực thể (Nguyên · 60 giây)
+@@@
+SLIDE 9 — State Transition Diagram (Nguyên · 45 giây)
+@@@
+SLIDE 9 → UC8 ĐĂNG KÝ XE (Nguyên · 80 giây)
+@@@
+CHUYỂN GIAO — Nguyên → Thuận
+@@@
+SLIDE 8 — 5 phân hệ, 24 Use Case (Thuận · 30 giây)
+@@@
+SLIDE 10 — Data Flow Diagram mức 1 (Thuận · 40 giây)
+@@@
+SLIDE 10 → UC12 TẠO ĐẶT LỊCH (Thuận · 110 giây)
+@@@
+CHUYỂN GIAO — Thuận → Đạt
+@@@
+SLIDE 12 & 13 — Dialog Map (Đạt · 40 giây)
+@@@
+SLIDE 13 → UC17, UC19, UC21 — CHECK-IN ĐẾN CHECK-OUT (Đạt · 120 giây)
+@@@
+SLIDE 11 — Non-Functional Requirements (Đạt · 25 giây)
+@@@
+SLIDE 14 — Thank You (Đạt · 20 giây)

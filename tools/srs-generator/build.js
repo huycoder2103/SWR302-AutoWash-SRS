@@ -299,7 +299,7 @@ children.push(...figart('SwimLane', 'Swimlanes-3. Booking.drawio.png', 600, 199,
 children.push(...figart('SwimLane', 'Swimlanes-4. Queue.drawio.png', 600, 159, 'Hình 11: Swimlane — Quản lý hàng chờ.'));
 children.push(...figart('SwimLane', 'Swimlanes-5. Administration - Notifications.drawio.png', 600, 156, 'Hình 12: Swimlane — Quản trị & Thông báo.'));
 children.push(h3('2.3.6 Sơ đồ luồng dữ liệu (Data Flow Diagram — Mức 1)'));
-children.push(...figart('DataFlow', 'DataFlowDiagram_Level1.drawio.png', 600, 301, 'Hình 13: Sơ đồ luồng dữ liệu mức 1 (DFD Level 1).'));
+children.push(...figart('DataFlow', 'DataFlowDiagram.drawio.png', 600, 280, 'Hình 13: Sơ đồ luồng dữ liệu mức 1 (DFD Level 1) — nguồn: diagrams/DataFlowDiagram.drawio.'));
 children.push(h2('2.4 Sơ đồ chuyển trạng thái'));
 children.push(...figart('StateTransition', 'StateTransition.drawio.png', 600, 355, 'Hình 14: Sơ đồ chuyển trạng thái — Booking, Queue entry (composite In progress), OTP lifecycle (nguồn: diagrams/StateTransition.drawio).'));
 children.push(h3('2.4.1 Trạng thái đặt lịch (Booking)'));
